@@ -1,0 +1,72 @@
+#user-info
+  color: #666666
+  margin-bottom: 40px
+  .info--edit
+    margin-top: 12px
+    text-align: right
+  .edit-link
+    color: #00b8ff
+    font-size: 1em
+    height: 10px
+    padding: 3px 30px 0 0
+    background: url(/public/img/edit_pen.png) center right no-repeat transparent
+    background-size: auto 100%
+  .info--detail
+    font-size: 1em
+    line-height: 1.5em
+    margin-top: 12.5px
+    border:
+      top: 1px dashed #a0a0a0
+      bottom: 1px dashed #a0a0a0
+    padding: 20px 10px
+    .title
+      letter-spacing: 2em
+      margin-right: -2em
+      &.en
+        letter-spacing: 0
+        margin-right: 0
+  .info--product-list
+    text-align: center
+    margin-top: 22.5px
+    padding: 0
+  .product-item
+    text-align: left
+    display: inline-block
+    +size(310px, 90px)
+    margin-right: 0 
+    margin-bottom: 30px
+  +at-breakpoint( 640px 12)
+    .info--product-list
+      text-align: left
+    .product-item
+      margin-right: 15px
+      &:nth-child(even)
+        margin-right: 0
+  .product--figure
+    width: 30%
+    height: 100%
+    float: left
+    background-color: #808080
+  .product-info
+    height: 100%
+    color: #666666
+    font-size: 0.8em
+    line-height: 1.3em
+    margin-left: 30%
+    padding: 1.5625%
+    background-color: #e6e6e6
+  .status
+    color: #00b8ff
+    &.expired
+      color: red
+  .active-new-product
+    +size(98%, 90px)
+    margin: 0 auto
+    border: 2px dashed #e6e6e6
+    position: relative
+    margin-bottom: 2.5rem
+  .active-btn
+    +size(50%, 50%)
+    display: block
+    background: url(/public/img/active_btn.jpg) center center no-repeat transparent
+    background-size: 100% auto

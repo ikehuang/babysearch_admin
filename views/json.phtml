@@ -1,0 +1,1 @@
+{% if result is defined %}{% autoescape false %}{{ result|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }}{% endautoescape %}{% else %}{}{% endif %}

@@ -1,0 +1,32 @@
+{% extends 'dashboard/layout.phtml' %}
+{% block content %}
+<div id="petinfo" class="frame-width-half">
+	<form name="petinfo--form" method="post" action="/petinfo_update">
+		<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		<input type="hidden" name="imei_code" value="{{ product.imei_code }}">
+		<h1 class="petinfo--header header">{{ product.type }}</h1>
+		<p class="imei-content">{{ l.IMEI_number }}：{{ product.imei_code }}</p>
+		<select name="pet_type">
+			<option disabled>{{ l.Type_Pet }}</option>
+			{% for p in pet_type %}
+			{% if p.specie_name == product.pet_type %}
+			<option value="{{ p.specie_name }}" selected>{{ p.specie_name }}</option>
+			{% else %}
+			<option value="{{ p.specie_name }}">{{ p.specie_name }}</option>
+			{% endif %}
+			{% endfor %}
+		</select>
+		<!-- <input type="text" name="pet_type" placeholder='寵物類型' value="{{ product.pet_type }}" /> -->
+		<input type="text" name="pet_name" placeholder='{{ l.Pet_name }}' value="{{ product.pet_name }}" />
+		<p class="imei-content">{{ l.SIM_card_valid_date }}：</p>
+		<input type="text" name="active-date" value="{{ product.service_expired|date('Y-m-d') }}" disabled />
+		<button type='button' class='petinfo--continue submit'>{{ l.product_points }}</button>
+		<div class="service-block">
+			<p class="expired-date">{{ l.Product_warranty_date }}：{{ product.warranty_expired|date('Y-m-d') }}</p>
+			<p class="points">{{ l.product_points }}：{{ product.points }}</p>
+		</div>
+		<a href="/" class='petinfo--cancel'>{{ l.BACK }}</a>
+		<button type='submit' class='petinfo--submit submit'>{{ l.SAVE }}</button>
+	</form>
+</div>
+{% endblock %}

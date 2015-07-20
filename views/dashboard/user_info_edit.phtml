@@ -1,0 +1,37 @@
+{% extends 'dashboard/layout.phtml' %}
+{% block content %}
+<div id="user-info-edit" class="frame-width-half">
+	<form name="userinfoedit--form" method="post" action="/user_info_edit">
+		<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		<input type="hidden" name="email" value="{{ user.email }}">
+		<h1 class="userinfo--header header">{{ l.Edit_User_profile }}</h1>
+		{% if flash.error is defined %}
+		<h4 class="alert_error">{{ flash.error }}</h4>
+		{% endif %}
+		<p class="email-content">{{ l.user_email }}：{{ user.email }}</p>
+		<input type="text" name="phone" placeholder='{{ l.Mobile_Number }}' value="{{ user.phone }}" required />
+		<label class="userinfo--label">{{ l.Other_Information }}</label>
+		<input type="text" name="name" placeholder='{{ l.Name }}' value="{{ user.name }}" required />
+		<div class="checkbox-wall">
+			<label class="checkbox-label">
+				{% if user.gender == 'male' %}
+				<input type="radio" name="gender" value="male" checked />&nbsp;{{ l.Male }}
+				{% else %}
+				<input type="radio" name="gender" value="male" />&nbsp;{{ l.Male }}
+				{% endif %}
+			</label>
+			<label class="checkbox-label">
+				{% if user.gender == 'female' %}
+				<input type="radio" name="gender" value="female" checked />&nbsp;{{ l.Female }}
+				{% else %}
+				<input type="radio" name="gender" value="female" />&nbsp;{{ l.Female }}
+				{% endif %}
+			</label>
+		</div>
+		<input type="text" name="zipcode" placeholder='{{ l.ZIPCODE }}' value="{{ user.zipcode }}" required />
+		<input type="text" name="address" placeholder='{{ l.ADDRESS }}' value="{{ user.address }}" required />
+		<a href="/" class='userinfo--cancel'>{{ l.BACK }}</a>
+		<button type='submit' class='userinfo--submit submit'>{{ l.SAVE }}</button>
+	</form>
+</div>
+{% endblock %}

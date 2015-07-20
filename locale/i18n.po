@@ -1,0 +1,9 @@
+# My comment
+#. Programmer comment
+#: location.c:23
+#| msgctxt "Old context"
+#| msgid "Won"
+#, fuzzy
+msgctxt "Disambiguation for context"
+msgid "One"
+msgstr "Een"

@@ -1,0 +1,65 @@
+{% extends 'admin/layout.phtml' %}
+{% block slidebar %} {% include 'admin/slidebar.phtml' %}{% endblock %}
+{% block content %}
+<section id="main" class="column">
+	{% if flash.error is defined %}
+	<h4 class="alert_info">{{ flash.error }}</h4>
+	{% endif %}
+	<!-- <h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4> -->
+	
+	<article class="module width_full">
+		<header><h3 class="tabs_involved">Baby Search</h3></header>
+		<div class="module_content">
+			<form class="add-form" method="post" action="/admin/update_status">
+				<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+				<input type="hidden" name="serial_number" value="{{ list }}" />
+				<fieldset>
+					<div>確定要把序號 {{ list }} 設為停用?</div>
+					<input type="button" value="取消" class="btn cancel" onClick="history.go(-1)"/>
+					<input type="submit" value="停用" class="alt_btn"/>
+				</fieldset>
+				<!-- 
+				<fieldset>
+					<label>經銷商</label>
+					<div class="clear"></div>
+					<input class="trisect" type="text" placeholder="編號" name="dealer_num" required />
+					<input class="trisect" type="text" placeholder="名稱" name="dealer_name" required />
+					<input class="trisect" type="text" placeholder="分店代碼" name="dealer_shop" />
+				</fieldset>
+				<fieldset>
+					<label>IMEI條碼</label>
+					<input type="text" placeholder="請輸入IMEI條碼" name="imei_num" required />
+				</fieldset>
+				<fieldset>
+					<label>購買人資訊</label>
+					<div class="clear"></div>
+					<input class="name" type="text" placeholder="姓名" name="name" />
+					<label class="gender">男<input type="radio" name="gender" value="male" checked /></label>
+					<label class="gender">女<input type="radio" name="gender" value="female" /></label>
+					<input class="zip-code" type="text" placeholder="郵遞區號" name="zip_code" />
+					<input class="address" type="text" placeholder="地址" name="address" />
+					<input class="half" type="text" placeholder="手機號碼" name="phone" />
+					<input class="half" type="email" placeholder="email" name="email" />
+					<div class="clear"></div>
+					<input type="submit" value="送出" class="alt_btn">
+				</fieldset>
+				 -->
+			</form>
+		</div>
+
+	</article><!-- end of content manager article -->
+	<div class="spacer"></div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+(function($, window, undefined) {
+	$('.add-form').submit(function() {
+		if( $('input[name=imei_num]').val().length != 15 ) {
+			alert('IMEI條碼輸入有誤！');
+			return false;
+		}
+	});
+}) (jQuery, window);
+</script>
+{% endblock %}

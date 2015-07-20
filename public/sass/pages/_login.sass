@@ -1,0 +1,69 @@
+#login
+  .login--wrap
+    max-width: 640px
+    margin: 0 auto
+  .login--block
+    text-align: center
+    padding-bottom: 120px
+    background-color: #f2f2f2
+  .login--banner
+    img
+      width: 100%
+      height: auto
+  .register--notice
+    width: 300px 
+    text-align: left
+    line-height: 1.5em
+    margin: 22.5px auto 0
+    color: #666666
+  .login--submit
+    +size(300px, 40.5px)
+    color: $white
+    font-size: 1.5em
+    margin-top: 22.5px
+    background: url(/public/img/login_btn.png) no-repeat 0 0 transparent
+    background-size: cover
+  .login--register-desc
+    width: 96%
+    max-width: 600px
+    margin: 22.5px auto 0
+    text-align: center
+    font-size: 1em
+    color: #666666
+  .login--register
+    +size(auto, 40px)
+    +radius(1.5em)
+    color: white
+    text-align: center
+    font-size: 0.9em
+    padding: 0 10px
+    background-color: #666666
+    margin-left: 5px
+    line-height: 40px
+    display: inline-block
+    vertical-align: middle
+  .select-language-block
+    text-align: right
+    padding: 1em 3.833333% 1em 0
+    +absolute(bottom 0 right 0)
+    .now-lang
+      font-size: 2.5em
+      vertical-align: middle
+    .select-lang
+      +size(68px)
+      border: 0 none
+      display: inline-block
+      vertical-align: middle
+      text-indent: -999em
+      text-overflow: ""
+      -moz-appearance: none
+      -webkit-appearance: none
+      &.zh_tw
+        background: url(/public/img/zh_TW.png) no-repeat scroll left center transparent
+        +background-size (100% auto)
+      &.en
+        background: url(/public/img/EN.png) no-repeat scroll 0 0 transparent
+        +background-size (100% auto)
+    +at-breakpoint(4 640px)
+      .select-lang
+        +size(34px)

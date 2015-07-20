@@ -1,0 +1,28 @@
+<section id="secondary_bar">
+	<div class="user">
+		<p>{{ admin.name }}</p>
+		<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+	</div>
+	<div class="breadcrumbs_container">
+		<article class="breadcrumbs"><a href="/admin">後台管理</a> <div class="breadcrumb_divider"></div> <a class="current">{{ page_name }}</a></article>
+	</div>
+</section><!-- end of secondary bar -->
+<aside id="sidebar" class="column">
+	<form class="quick_search" method="POST" action="/admin/search">
+		<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		<input type="text" placeholder="搜尋" name="imei_code" required />
+		<input type="submit" value="送出" class="btn" />
+	</form>
+	<hr/>
+	<h3>產品服務</h3>
+	<ul class="toggle">
+		<li class="icn_new_article"><a href="/admin">產品管理</a></li>
+		<!-- 
+		<li class="icn_edit_article"><a href="/admin/pending">待開通設備</a></li>
+		<li class="icn_edit_article"><a href="/admin/expired">到期設備</a></li>
+		 -->
+		<li class="icn_edit_article"><a href="/admin/q_tag">Q Tag</a></li>
+		<li class="icn_edit_article"><a href="/admin/n_tag">N Tag</a></li>
+		<li class="icn_edit_article"><a href="/admin/b_tag">B Tag</a></li>
+	</ul>
+</aside><!-- end of sidebar -->

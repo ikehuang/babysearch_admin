@@ -1,0 +1,111 @@
+{% extends 'admin/layout.phtml' %}
+{% block slidebar %} {% include 'admin/slidebar.phtml' %}{% endblock %}
+{% block content %}
+<section id="main" class="column">	
+	<article class="module width_full">
+		<header><h3 class="tabs_involved">即將到期設備</h3></header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+					<th>No.</th> 
+					<th>IMEI</th> 
+					<th>SIM卡使用期限</th>
+					<th>產品保固日期</th>
+					<th>使用期限</th>
+					<th>SIM卡服務狀態</th>
+					<th>保固狀態</th>
+				</tr> 
+			</thead> 
+			<tbody>
+				{% if list_30days|length > 0 or list_expired|length > 0 %}
+				{% for l in list_30days %}
+				<tr> 
+					<td>{{ loop.index }}.</td> 
+					<td><a class="imei_code ellipsis" href="/admin/product/{{ l.imei_code }}" title="{{ l.imei_code }}">{{ l.imei_code }}</a></td> 
+					<td>
+						<p class="expired-content" title="{{ l.service_expired }}">{{ l.service_expired|date('Y-m-d') }}</p>
+					</td> 
+					<td>
+						<p class="expired-content" title="{{ l.warranty_expired }}">{{ l.warranty_expired|date('Y-m-d') }}</p>
+					</td>
+					<td>
+						{% set utc_service_time = l.service_expired|date('U') %}
+						{% set utc_today_time = "now"|date('U') %}
+						{% set remain_day = (utc_service_time - utc_today_time)//86400 %}
+						{% if remain_day == 0 %}
+						<p class="expired-content red">剩餘{{ (utc_service_time - utc_today_time)//3600 }}小時到期</p>
+						{% elseif remain_day <= 7 %}
+						<p class="expired-content orange ellipsis">剩餘{{ remain_day }}天到期</p>
+						{% elseif remain_day <= 14 %}
+						<p class="expired-content yellow ellipsis">剩餘{{ remain_day }}天到期</p>
+						{% elseif remain_day <= 30 %}
+						<p class="expired-content green ellipsis">剩餘{{ remain_day }}天到期</p>
+						{% endif %}
+					</td>
+					<td>
+						{% if l.service_status == 'active' %}
+						<p class="table-content green ellipsis">SIM卡使用中</p>
+						{% elseif l.service_status == 'expired' %}
+						<p class="table-content red ellipsis">SIM卡服務過期</p>
+						{% endif %}
+					</td>
+					<td>
+						{% if l.active_status == 'inactive' %}
+						<p class="table-content yellow ellipsis">未開通</p>
+						{% elseif l.active_status == 'pending' %}
+						<p class="table-content orange ellipsis">等待開通</p>
+						{% elseif l.active_status == 'active' %}
+						<p class="table-content green ellipsis">開通保固中</p>
+						{% elseif l.active_status == 'expired' %}
+						<p class="table-content red ellipsis">保固過期</p>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+				{% for l in list_expired %}
+				<tr> 
+					<td>{{ loop.index }}.</td> 
+					<td><a class="imei_code ellipsis" href="/admin/product/{{ l.imei_code }}" title="{{ l.imei_code }}">{{ l.imei_code }}</a></td> 
+					<td>
+						<p class="expired-content red" title="{{ l.service_expired }}">{{ l.service_expired|date('Y-m-d') }}</p>
+					</td> 
+					<td>
+						<p class="expired-content" title="{{ l.warranty_expired }}">{{ l.warranty_expired|date('Y-m-d') }}</p>
+					</td>
+					<td>
+						<p class="expired-content red">已到期</p>
+					</td>
+					<td>
+						{% if l.service_status == 'active' %}
+						<p class="table-content green ellipsis">SIM卡使用中</p>
+						{% elseif l.service_status == 'expired' %}
+						<p class="table-content red ellipsis">SIM卡服務過期</p>
+						{% endif %}
+					</td>
+					<td>
+						{% if l.active_status == 'inactive' %}
+						<p class="table-content yellow ellipsis">未開通</p>
+						{% elseif l.active_status == 'pending' %}
+						<p class="table-content orange ellipsis">等待開通</p>
+						{% elseif l.active_status == 'active' %}
+						<p class="table-content green ellipsis">開通保固中</p>
+						{% elseif l.active_status == 'expired' %}
+						<p class="table-content red ellipsis">保固過期</p>
+						{% endif %}
+					</td> 
+				</tr>
+				{% endfor %}
+				{% else %}
+				<tr><td colspan="13" style="text-align:center;">尚無資訊</td></tr>
+				{% endif %}
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+		</div><!-- end of .tab_container -->
+	</article><!-- end of content manager article -->
+	<div class="spacer"></div>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'dashboard/layout.phtml' %}
+{% block content %}
+<div id="user-info" class="frame-width">
+	<h1 class="info--header header">{{ l.User_Profile }}</h1>
+	<div class="info--edit">
+		<a class="edit-link" href="/user_info_edit">{{ l.data_edition }}</a>
+	</div>
+	<div class="info--detail">
+		<p class="content">
+			{{ l.user_email }}：{{ user.email }}
+		</p>
+		<p class="content">
+			{{ l.Mobile_Number }}：{{ user.phone }}
+		</p>
+		<p class="content">
+			<span class="title {{ locale }}">{{ l.user_name }}</span>：{{ user.name }}
+		</p>
+		<p class="content">
+			<span class="title {{ locale }}">{{ l.Gender }}</span>：{% set gender = user.gender == 'male' ? l.user_male : l.user_female %} {{ gender }}
+		</p>
+		<p class="content">
+			<span class="title {{ locale }}">{{ l.Address }}</span>：{{ user.zipcode }} {{ user.address }}
+		</p>
+	</div>
+	<h1 class="info--header header">{{ l.Activated_Product }}</h1>
+	<ul class="info--product-list">
+		{% for item in list %}
+		<li class="product-item clearfix">
+			<a href="/pet_info_edit/{{ item.imei_code }}">
+				<figure class="product--figure"></figure>
+				<div class="product-info">
+					<p class="content">{{ item.type }}</p>
+					<p class="content">{{ l.IMEI_number }}：{{ item.imei_code }}</p>
+					<p class="content ellipsis" title="{{ item.pet_type }}">{{ l.Type_Pet }}： {{ item.pet_type }}</p>
+					<p class="content ellipsis" title="{{ item.pet_name }}">{{ l.Pet_name }}： {{ item.pet_name }}</p>
+					<p class="content status {{ item.active_status }}">{{ l.Valid_date }}： {{ item.service_expired|date('Y-m-d') }}</p>
+				</div>
+			</a>
+		</li>
+		{% endfor %}
+		<li class="product-item clearfix">
+			<div class="active-new-product">
+				<a class="active-btn center-middle" href="/active_product"></a>
+			</div>
+		</li>
+	</ul>
+	<!-- <div class="active-new-product">
+		<a class="active-btn center-middle" href="/active_product"></a>
+	</div> -->
+</div>
+{% endblock %}

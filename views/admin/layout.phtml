@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="Content-Language" content="zh-tw">
+	{% if page_name is defined %}
+	<title> {{ page_name }} - Baby Search 後台 </title>
+	{% else %}
+	<title> Baby Search 後台 </title>
+	{% endif %}
+	<link rel="icon" href="/favicon.jpg" type="image/x-icon">
+	<link rel="shortcut icon" href="/favicon.jpg" type="image/x-icon">
+	<link rel="stylesheet" href="/public/css/admin.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/public/css/admin_main.css" type="text/css" media="screen" />
+	{% block css %}{% endblock %}
+</head>
+<body>
+	<header id="header">
+		<hgroup>
+			<h1 class="site_title">
+				<a href="/admin">
+					<img class="header--logo" id='logo' src='/public/img/logo-01.png'/>
+				</a>
+			</h1>
+			{% if admin is defined and admin.email is defined %}
+			<h2 class="section_title">{{ page_name }}</h2>
+				<div class="btn_view_site"><a href="/admin/logout">登出</a>
+			</div>
+			{% endif %}
+		</hgroup>
+	</header> <!-- end of header bar -->
+	<main id="main-container" class="container clear">
+		{% block slidebar %}{% endblock %}
+		{% block content %}{% endblock %}
+	</main>
+	<footer id='footer'>
+		<!-- &copy; {{ 'now'|date('Y') }} 恮欣科技股份有限公司  -->
+	</footer>
+<script>
+	var csrf_key = '{{ csrf_key }}';
+	var csrf_token = '{{ csrf_token }}';
+</script>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<!-- <script src='//cdn.jsdelivr.net/tablesorter/2.0.3/jquery.tablesorter.min.js'></script> -->
+<script src='//cdn.jsdelivr.net/jquery.blockui/2.65.0/jquery.blockUI.min.js'></script>
+<script src='/public/js/admin.js'></script>
+{% block js %}{% endblock %}
+</body>
+</html>

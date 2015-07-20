@@ -1,0 +1,27 @@
+{
+    "name": "iPet Tracker",
+    "description": "iPet Tracker with PSR-0 autoload configuration.",
+    "require": {
+        "php": ">=5.5.0",
+        "twig/twig": "1.*",
+        "twig/extensions": "*",
+        "slim/slim": "2.*",
+        "slim/views": "0.1.*",
+        "slim/extras": "2.*",
+        "lusitanian/oauth": "~0.2"
+    },
+    "autoload": {
+        "classmap": [
+            "Lib/SessionNative.php",
+            "Lib/Session.php",
+            "Lib/CsrfGuard.php",
+            "Lib/gapi.class.php",
+            "Lib/DbModel.php",
+            "Lib/PseudoCrypt.php",
+            "Lib/google-api-php-client/src/Google_Client.php"
+        ],
+        "psr-0": {
+            "Twig_Extensions_": "vendor/slim/extras/Slim/Extras/Views/Extension"
+        }
+    }
+}

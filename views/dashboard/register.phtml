@@ -1,0 +1,48 @@
+{% extends 'dashboard/layout.phtml' %}
+{% block content %}
+<div id="register" class="frame-width-half">
+	<form name="register--form" method="post" action="/register">
+		<h1 class="register--header header">{{ l.Create_a_new_account }}</h1>
+		{% if flash.error is defined %}
+		<h4 class="alert_error">{{ flash.error }}</h4>
+		{% endif %}
+		<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		<input type="email" name="email" placeholder='{{ l.Email }}' autofocus required />
+		<input type="email" name="email_repeat" placeholder='{{ l.confirm_Email }}' required />
+		<input type="text" name="phone" placeholder='{{ l.Mobile_Number }}' required />
+		<label class="register--label">{{ l.Other_Information }}</label>
+		<input type="text" name="name" placeholder='{{ l.Name }}' required />
+		<div class="checkbox-wall">
+			<label class="checkbox-label">
+				<input type="radio" name="gender" value="male" checked />&nbsp;{{ l.Male }}
+			</label>
+			<label class="checkbox-label">
+				<input type="radio" name="gender" value="female" />&nbsp;{{ l.Female }}
+			</label>
+		</div>
+		<input type="text" name="zipcode" placeholder='{{ l.ZIPCODE }}' required />
+		<input type="text" name="address" placeholder='{{ l.ADDRESS }}' required />
+		<h1 class="register--header header">{{ l.Activate }}</h1>
+		<label class="register--label">{{ l.IMEI_number }}</label>
+		<p class="imei-desc">{{ l.What_is_IMEI_number }}</p>
+		<input type="text" name="imei_code" placeholder='{{ l.product_Bar_Code }}' required />
+		<select name="pet_type">
+			<option disabled>{{ l.Type_Pet }}</option>
+			{% for p in pet_type %}
+			<option value="{{ p.specie_name }}">{{ p.specie_name }}</option>
+			{% endfor %}
+		</select>
+		<input type="text" name="pet_name" placeholder='{{ l.Pet_name }}' />
+		<p class="register--sim-desc">
+			{{ l.extra_charge }}
+		</p>
+		<br>
+		<a href="/login" class='register--cancel'>{{ l.Cancel }}</a>
+		<button type='submit' class='register--submit submit'>{{ l.Submit }}</button>
+	</form>
+</div>
+<div id="dialog" style="display:none;">
+	<img src="/public/img/imei_desc_{{ locale }}.jpg">
+	<div class="del"></div>
+</div>
+{% endblock %}

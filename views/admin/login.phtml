@@ -1,0 +1,15 @@
+{% extends 'admin/layout.phtml' %}
+{% block content %}
+<div class="login-block clearfix">
+	<form name="login_form" method="post" action="/admin/login">
+		<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		{% if flash.error is defined %}
+		<h4 class="alert_error">{{ flash.error }}</h4>
+		{% endif %}
+		<input type="email" name="email" placeholder='帳號' autofocus required />
+		<input type="password" name="password" placeholder='密碼' required />
+		<button type='submit' class='login--submit submit'>登入</button>
+	</form>
+	
+</div>
+{% endblock %}

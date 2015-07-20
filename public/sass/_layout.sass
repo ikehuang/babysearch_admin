@@ -1,0 +1,56 @@
+body
+  font
+    size: $font-size
+    weight: lighter
+    family: $font-garamond
+  position: relative
+  display: -webkit-box
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  
+  -webkit-box-orient: vertical
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+  min-height: 100vh
+/* header */
+#header
+  +size(100%, 40px)
+  overflow: visible
+  background-color: #f08300
+  position: relative 
+  .header--logo
+    float: left
+    height: 80%
+    +margin(top 5px left 10px)
+  .header--logout
+    float: right
+    color: #f08300
+    +margin(top 10px right 10px)
+    text-align: center
+    display: block
+    padding: 5px 10px 
+    font:
+      size: 0.9em
+      weight: bold
+    border-radius: 2em
+    background-color: white
+#main
+  -webkit-box-flex: 1 0 auto
+  -webkit-flex: 1 0 auto
+  -ms-flex: 1 0 auto
+  flex: 1 0 auto
+.container
+  position: relative
+
+/* footer */
+#footer
+  height: 30px
+  color: #959595
+  line-height: 30px
+  font:
+    size: 0.625em
+    weight: bold
+  text-align: center
+  background-color: #e6e6e6

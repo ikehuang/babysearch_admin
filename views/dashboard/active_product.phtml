@@ -1,0 +1,28 @@
+{% extends 'dashboard/layout.phtml' %}
+{% block content %}
+<div id="active" class="frame-width-half">
+	<form name="active--form" method="post" action="/active_product">
+		<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		<h1 class="active--header header">{{ l.Activate }}</h1>
+		{% if flash.error is defined %}
+		<h4 class="alert_error">{{ flash.error }}</h4>
+		{% endif %}
+		<label class="active--label">{{ l.IMEI_number }}</label>
+		<p class="imei-desc">{{ l.What_is_IMEI_number }}</p>
+		<input type="text" name="imei_code" placeholder='{{ l.product_Bar_Code }}' required />
+		<select name="pet_type">
+			<option disabled>{{ l.Type_Pet }}</option>
+			{% for p in pet_type %}
+			<option value="{{ p.specie_name }}">{{ p.specie_name }}</option>
+			{% endfor %}
+		</select>
+		<input type="text" name="pet_name" placeholder='{{ l.Pet_name }}' />
+		<a href="/" class='active--cancel'>{{ l.Cancel }}</a>
+		<button type='submit' class='active--submit submit'>{{ l.Submit }}</button>
+	</form>
+</div>
+<div id="dialog" style="display:none;">
+	<img src="/public/img/imei_desc_{{ locale }}.jpg">
+	<div class="del"></div>
+</div>
+{% endblock %}

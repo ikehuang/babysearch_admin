@@ -1,0 +1,43 @@
+{% extends 'dashboard/layout.phtml' %}
+{% block css %}
+<link rel="prefetch" href="/public/img/banner_pc.jpg">
+<link rel="prefetch" href="/public/img/banner_mobile.jpg">
+{% endblock %}
+{% block content %}
+<div id="login">
+	<div class="">
+		<figure class="login--banner">
+			<img class="phone-hidden" src="/public/img/banner_pc.jpg">
+			<img class="phone-show" src="/public/img/banner_mobile.jpg">
+		</figure>
+	</div>
+	<div class="login--block">
+		<div class="login--wrap clearfix">
+			<form name="login-form" method="post" action="/login">
+				<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+				{% if flash.error is defined %}
+				<h4 class="alert_error">{{ flash.error }}</h4>
+				{% endif %}
+				<h3 class="deep-grey">{{ l.product_activation_login }}</h3>
+				<p class="register--notice">
+					{{ l.SIM_card_inside }}
+				</p>
+				<input type="email" name="email" placeholder='{{ l.Email }}' autofocus required />
+				<input type="text" name="phone" placeholder='{{ l.Mobile_Number }}' required />
+				<button type='submit' class='login--submit submit'>{{ l.Login }}</button>
+			</form>
+			<p class="login--register-desc">
+				{{ l.I_am_NEW }}
+				<a class="login--register" href="/register">{{ l.Create_a_new_account }}</a>
+			</p>
+		</div>
+	</div>
+	<div class="select-language-block">
+		<!-- <span class="now-lang">{{ locale }}</span> -->
+		<select class="select-lang {{ locale }}">
+			<option {% if locale == 'zh_tw' %} selected="selected" {% endif %} value="zh_tw">繁體中文</option>
+			<option {% if locale == 'en' %} selected="selected" {% endif %} value="en">English</option>
+		</select>
+	</div>
+</div>
+{% endblock %}

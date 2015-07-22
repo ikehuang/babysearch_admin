@@ -408,7 +408,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
         $admin = SessionNative::read('ADMIN');
         $product = Product::get_by_imei_code( $imei_code );
         $app->render('admin/product.phtml', array(
-            'page_name' => '檢視訂單',
+            'page_name' => '檢視Tag資料',
             'admin'     => $admin,
             'p'         => $product
         ));

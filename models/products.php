@@ -267,6 +267,8 @@ final class Product extends DBModule {
     	
     	$membership         =& $data['membership'];
     	
+    	var_dump($membership);die();
+    	
     	date_default_timezone_set("Asia/Taipei");
     	$today = date("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
     	$expired = date('Y-m-d', strtotime($today . " + " . $membership . " year"));

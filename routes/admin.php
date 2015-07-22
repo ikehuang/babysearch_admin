@@ -258,7 +258,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     						$app->get('/delete_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
     							$admin = SessionNative::read('ADMIN');
     							$bulletin = Product::get_bulletin_by_imei_code( $id );
-    							$app->render('admin/delete.phtml', array(
+    							$app->render('admin/delete_bulletin.phtml', array(
     									'page_name' => '移除',
     									'admin'     => $admin,
     									'b'         => $bulletin

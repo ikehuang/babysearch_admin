@@ -290,6 +290,31 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     										$app->redirect('/admin/');
     									}
     								});
+    									$app->get('/reopen(/:serial_number)', $authenticate_admin, function( $serial_number = null ) use ( $app ) {
+    										$admin = SessionNative::read('ADMIN');
+    										//var_dump($serial_number);die();
+    										$product = Product::get_by_imei_code( $serial_number );
+    										$app->render('admin/reopen.phtml', array(
+    												'page_name' => '啟用',
+    												'admin'     => $admin,
+    												//'p'         => $product
+    												'list'		=> $serial_number
+    										));
+    									});
+    									$app->post('/reopen_status', $authenticate_admin, function() use ( $app ) {
+    											
+    										$req = $app->request->params();
+    											
+    										$result = Product::reopen_status($req['serial_number']);
+    											
+    										if( $result !== false ) {
+    											$app->redirect('/admin');
+    										} else {
+    											//sBuyer::delete( $buyer_id );
+    											$app->flash('error', '寫入資料錯誤');
+    											$app->redirect('/admin/');
+    										}
+    									});
     $app->get('/add', $authenticate_admin, function() use ( $app ) {
         $admin = SessionNative::read('ADMIN');
         $app->render('admin/add.phtml', array(

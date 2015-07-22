@@ -300,6 +300,26 @@ final class Product extends DBModule {
 			self::_update( $query, $params );
 		}
 	}
+	public static function reopen_status( $list ) {
+	
+		$status = 'normal';
+	
+		$array = (explode(",",$list));
+	
+		foreach($array as $serial_number) {
+				
+			$query = "UPDATE devices SET
+					status			=	:status
+					WHERE serial_number	=	:serial_number";
+	
+			$params = array(
+					'serial_number'  => $serial_number,
+					'status'         => $status
+			);
+	
+			self::_update( $query, $params );
+		}
+	}
     public static function change_warranty_status( $imei_code = null, $status ) {
         if( is_null($imei_code) ) return false;
         $query = "UPDATE `devices` SET

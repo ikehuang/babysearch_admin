@@ -112,7 +112,7 @@
 							{% elseif l.status == 'lost' %}
 							{{ '遺失' }}
 							{% elseif l.status == 'invalid' %}
-							<font style="color:red;">{{ '停用' }}</font>
+							<a href='/admin/reopen'><font style="color:red;">{{ '停用' }}</font></a>
 							{% endif %}
 						</p>
 					</td> 

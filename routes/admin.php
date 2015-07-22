@@ -265,6 +265,17 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     									$app->redirect('/admin/');
     								}
     							});
+    								$app->get('/reset(/:serial_number)', $authenticate_admin, function( $serial_number = null ) use ( $app ) {
+    									$admin = SessionNative::read('ADMIN');
+    									//var_dump($serial_number);die();
+    									$product = Product::get_by_imei_code( $serial_number );
+    									$app->render('admin/reset.phtml', array(
+    											'page_name' => '清空資料',
+    											'admin'     => $admin,
+    											//'p'         => $product
+    											'list'		=> $serial_number
+    									));
+    								});
     								$app->post('/reset_tag', $authenticate_admin, function() use ( $app ) {
     										
     									$req = $app->request->params();

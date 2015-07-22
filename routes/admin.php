@@ -297,8 +297,8 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     										$app->render('admin/reopen.phtml', array(
     												'page_name' => '啟用',
     												'admin'     => $admin,
-    												//'p'         => $product
-    												'list'		=> $serial_number
+    												'p'         => $product
+    												//'list'		=> $serial_number
     										));
     									});
     									$app->post('/reopen_status', $authenticate_admin, function() use ( $app ) {

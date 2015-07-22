@@ -307,7 +307,9 @@ final class Product extends DBModule {
 		$array = (explode(",",$list));
 	
 		foreach($array as $serial_number) {
-				
+
+			var_dump($serial_number);die();
+			
 			$query = "UPDATE devices SET
 					status			=	:status
 					WHERE serial_number	=	:serial_number";

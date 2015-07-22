@@ -255,6 +255,29 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     							$app->redirect('/admin/');
     						}
     					});
+    						$app->get('/delete_bulletin(/:id)', $authenticate_admin, function( $serial_number = null ) use ( $app ) {
+    							$admin = SessionNative::read('ADMIN');
+    							$bulletin = Product::get_bulletin_by_imei_code( $id );
+    							$app->render('admin/delete.phtml', array(
+    									'page_name' => '移除',
+    									'admin'     => $admin,
+    									'b'         => $bulletin
+    							));
+    						});
+    						$app->post('/remove_bulletin', $authenticate_admin, function() use ( $app ) {
+    								
+    							$req = $app->request->params();
+    						
+    							$result = Product::delete_bulletin($req['id']);
+    						
+    							if( $result !== false ) {
+    								$app->redirect('/admin/bulletin');
+    							} else {
+    								//sBuyer::delete( $buyer_id );
+    								$app->flash('error', '寫入資料錯誤');
+    								$app->redirect('/admin/bulletin');
+    							}
+    						});
     						$app->get('/invalid(/:serial_number)', $authenticate_admin, function( $serial_number = null ) use ( $app ) {
     							$admin = SessionNative::read('ADMIN');
     							//var_dump($serial_number);die();

@@ -580,4 +580,70 @@ final class Product extends DBModule {
 		*/
         return $result === true ? self::get_last_insert_id() : false;
 	}
+	public static function get_bulletin_by_imei_code( $imei_code ) {
+		$query = "select * from bulletin where id = :imei_code";
+	
+		$params = array( 'imei_code' => $imei_code );
+	
+		return self::_query( $query, $params );
+	}
+	public static function delete_bulletin($id){
+		if(is_null($id)) return false;
+		 
+		$query = "DELETE FROM bulletin
+    			WHERE id = :id";
+		 
+		$params = array(
+				'id' => $id
+		);
+		/*
+		 $query = "UPDATE devices SET
+		status = :status,
+		type = :type,
+		name = :name,
+		photo = :photo,
+		message = :message,
+		expiry_date = :expiry_date,
+		latitude = :latitude,
+		longitude = :longitude,
+		battery_status = :battery_status,
+		category = :category,
+		open = :open,
+		email = :email,
+		gid = :gid,
+		created = :created,
+		lost_message = :lost_message,
+		lost_date = :lost_date,
+		lost_time = :lost_time,
+		lost_location = :lost_location,
+		lost_spec = :lost_spec,
+		lost_contact_id = :lost_contact_id
+		WHERE serial_number = :serial_number";
+		 
+		$params = array(
+				'status'   => 'new',
+				'type' => null,
+				'name'  => null,
+				'photo'  => null,
+				'message' => null,
+				'expiry_date' => null,
+				'latitude' => null,
+				'longitude' => null,
+				'battery_status' => null,
+				'category' => null,
+				'open' => null,
+				'email' => null,
+				'gid' => null,
+				'created' => null,
+				'lost_message' => null,
+				'lost_date' => null,
+				'lost_time' => null,
+				'lost_location' => null,
+				'lost_spec' => null,
+				'lost_contact_id' => null,
+				'serial_number' => $serial_number
+		);
+		*/
+		return self::_delete( $query, $params);
+	}
 }

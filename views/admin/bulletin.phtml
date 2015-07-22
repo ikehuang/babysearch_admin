@@ -17,7 +17,7 @@
 			</li>
 		</ul>
 		
-		<ul class="tabs" style="margin-top:10px;margin-left:200px;">
+		<ul class="tabs" style="margin-top:5px;margin-left:200px;">
 			<li>
 				<a href="/admin/device/{{ page-1 }}">&lt前一頁</a>
 			</li>
@@ -56,23 +56,23 @@
 					<td>
 						<p class="table-content ellipsis">
 						{% if l.status == 'normal' %}
-						{{ '發佈中' }}
+						<font margin-left:-5px;">{{ '發佈中' }}</font>
 						{% else %}
-						{{ 'N/A' }}
+						<font margin-left:-5px;">{{ 'N/A' }}</font>
 						{% endif %}
 						</p>
 					</td> 
 					<td>
 						<p class="imei_code ellipsis" title="{{ l.display }}">
 						{% if l.display == 'y' %}
-						<font style="color:blue;">{{ '發佈' }}</font>
+						<font style="color:blue;margin-left:15px;">{{ '發佈' }}</font>
 						{% else %}
-						<font style="color:red;">{{ '下架' }}</font>
+						<font style="color:red;margin-left:15px;">{{ '下架' }}</font>
 						{% endif %}
 						</p>
 					</td>
 					<td>
-						<a href="/admin/delete/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;"><strong>X</strong></font></p></div></a>
+						<a href="/admin/delete/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:15px;"><strong>X</strong></font></p></div></a>
 					</td>
 					<td>
 					</td>

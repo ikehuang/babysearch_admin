@@ -267,14 +267,14 @@ final class Product extends DBModule {
     	
     	$membership         =& $data['membership'];
     	
-    	var_dump($membership);die();
+    	//date_default_timezone_set("Asia/Taipei");
+    	//$today = date("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
+    	//$expired = date('Y-m-d', strtotime($today . " + " . $membership . " year"));
     	
-    	date_default_timezone_set("Asia/Taipei");
-    	$today = date("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
-    	$expired = date('Y-m-d', strtotime($today . " + " . $membership . " year"));
+    	//if($membership == 99)
+    		//$expired = '9999-12-31';
     	
-    	if($membership == 99)
-    		$expired = '9999-12-31';
+    	$expired = $membership;
     	
     	$query = "UPDATE devices SET
                  expiry_date  		= :expired,

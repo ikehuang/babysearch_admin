@@ -277,7 +277,7 @@ final class Product extends DBModule {
     	$expired = $membership;
     	
     	var_dump($expired);
-    	var_dump($membership);die();
+    	var_dump($imei_code);die();
     	
     	$query = "UPDATE devices SET
                  expiry_date  		= :expired,

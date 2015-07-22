@@ -507,4 +507,14 @@ final class Product extends DBModule {
     	*/
     	return self::_delete( $query, $params);
     }
+    public static function get_bulletin($page = 1) {
+    	$limit = 20;
+    	$start = $page == 1 ? 0 : ($page-1)*$limit;
+    	$start = $start <= 0 ? 0 : $start;
+    
+    	$query = "SELECT *
+    	FROM bulletin
+    	LIMIT {$start},{$limit}";
+    	return self::_query_all( $query );
+    }
 }

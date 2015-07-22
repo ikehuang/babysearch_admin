@@ -47,6 +47,21 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
             'page'          => $page
         ));
     });
+   
+   	$app->get('/bulletin', $authenticate_admin, function($page = 1) use ( $app ) {
+   		$admin = SessionNative::read('ADMIN');
+   	
+   		$page = 1;
+   		$list = Product::get_bulletin($page);
+   		//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+   	
+   		$app->render('admin/bulletin.phtml', array(
+   				'page_name' => '公告',
+   				'admin'     => $admin,
+   				'list'      => $list,
+   				'page'          => $page
+   		));
+   	});
 
     $app->get('/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
         $admin = SessionNative::read('ADMIN');

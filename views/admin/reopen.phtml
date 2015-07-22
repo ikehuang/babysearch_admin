@@ -12,9 +12,9 @@
 		<div class="module_content">
 			<form class="add-form" method="post" action="/admin/reopen_status">
 				<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
-				<input type="hidden" name="serial_number" value="{{ list }}" />
+				<input type="hidden" name="serial_number" value="{{ p.serial_number }}" />
 				<fieldset>
-					<div>此序號巳設為停用，是否重新啟用?</div>
+					<div>此序號"{{ p.serial_number }}"巳設為停用，是否重新啟用??</div>
 					<input type="button" value="取消" class="btn cancel" onClick="history.go(-1)"/>
 					<input type="submit" value="啟用" class="alt_btn"/>
 				</fieldset>

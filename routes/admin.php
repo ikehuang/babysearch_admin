@@ -265,6 +265,20 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     									$app->redirect('/admin/');
     								}
     							});
+    								$app->post('/reset_tag', $authenticate_admin, function() use ( $app ) {
+    										
+    									$req = $app->request->params();
+    										
+    									$result = Product::reset_tag($req['serial_number']);
+    										
+    									if( $result !== false ) {
+    										$app->redirect('/admin');
+    									} else {
+    										//sBuyer::delete( $buyer_id );
+    										$app->flash('error', '寫入資料錯誤');
+    										$app->redirect('/admin/');
+    									}
+    								});
     $app->get('/add', $authenticate_admin, function() use ( $app ) {
         $admin = SessionNative::read('ADMIN');
         $app->render('admin/add.phtml', array(

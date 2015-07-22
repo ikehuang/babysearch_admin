@@ -233,6 +233,73 @@ final class Product extends DBModule {
 			self::_update( $query, $params );
 		}
 	}
+	public static function reset_tag( $list ) {
+	
+		$reset = null;
+		$status = 'new';
+		
+		$array = (explode(",",$list));
+	
+		foreach($array as $serial_number) {
+				
+			$query = "UPDATE devices SET
+					status			=	:status,
+					type			=	:type,
+					name			=	:name,
+					photo			=	:photo,
+					message			=	:message,
+					expiry_date			=	:expiry_date,
+					latitude			=	:latitude,
+					longitude			=	:longitude,
+					battery_status			=	:battery_status,
+					category			=	:category,
+					open			=	:open,
+					email			=	:email,
+					gid			=	:gid,
+					created			=	:created,
+					lost_message			=	:lost_message,
+					lost_date			=	:lost_date,
+					lost_time			=	:lost_time,
+					lost_location			=	:lost_location,
+					lost_spec			=	:lost_spec,
+					lost_contact_id			=	:lost_contact_id,
+					sso_id			=	:sso_id,
+					subcategory			=	:subcategory,
+					lost_contact_id_2			=	:lost_contact_id_2,
+					lost_contact_id_3			=	:lost_contact_id_3
+					WHERE serial_number	=	:serial_number";
+	
+			$params = array(
+					'serial_number'  => $serial_number,
+					'status'         => $status,
+					'type'         => $reset,
+					'name'         => $reset,
+					'photo'         => $reset,
+					'message'         => $reset,
+					'expiry_date'         => $reset,
+					'latitude'         => $reset,
+					'longitude'         => $reset,
+					'battery_status'         => $reset,
+					'category'         => $reset,
+					'open'         => $reset,
+					'email'         => $reset,
+					'gid'         => $reset,
+					'created'         => $reset,
+					'lost_message'         => $reset,
+					'lost_date'         => $reset,
+					'lost_time'         => $reset,
+					'lost_location'         => $reset,
+					'lost_spec'         => $reset,
+					'lost_contact_id'         => $reset,
+					'sso_id'         => $reset,
+					'subcategory'         => $reset,
+					'lost_contact_id_2'         => $reset,
+					'lost_contact_id_3'         => $reset
+			);
+	
+			self::_update( $query, $params );
+		}
+	}
     public static function change_warranty_status( $imei_code = null, $status ) {
         if( is_null($imei_code) ) return false;
         $query = "UPDATE `devices` SET

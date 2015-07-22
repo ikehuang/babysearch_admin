@@ -8,11 +8,27 @@
 		  });
 		  
 		  list = list.replace(/,$/,'');
-
+	
 		  if(list.length == 0)
 		   return false;
 		  
 		  window.location.href = '/admin/invalid/' + list;
+	});
+	
+	$('#clear').on('click', function() {
+		
+		var list = '';
+		  
+		  $('input[name="choose"]:checked').each(function(){
+		   list += $(this).val()+",";
+		  });
+		  
+		  list = list.replace(/,$/,'');
+
+		  if(list.length == 0)
+		   return false;
+		  
+		  window.location.href = '/admin/reset/' + list;
 	});
 	
 	/*

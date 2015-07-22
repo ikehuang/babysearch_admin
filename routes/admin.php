@@ -337,6 +337,13 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
             'admin'     => $admin,
         ));
     });
+    	$app->get('/add_bulletin', $authenticate_admin, function() use ( $app ) {
+    		$admin = SessionNative::read('ADMIN');
+    		$app->render('admin/add_bulletin.phtml', array(
+    				'page_name' => '新增',
+    				'admin'     => $admin,
+    		));
+    	});
     $app->get('/import', $authenticate_admin, function() use ( $app ) {
     	$admin = SessionNative::read('ADMIN');
     	$app->render('admin/import.phtml', array(
@@ -424,7 +431,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
             //$app->redirect('/admin/add');
         //}
     });
-    	$app->post('/add_bulletin', $authenticate_admin, function() use ( $app ) {
+    	$app->post('/create_bulletin', $authenticate_admin, function() use ( $app ) {
     		$req = $app->request->params();
     	
     		$product_data = array(

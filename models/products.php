@@ -517,4 +517,67 @@ final class Product extends DBModule {
     	LIMIT {$start},{$limit}";
     	return self::_query_all( $query );
     }
+	public static function add_bulletin( $buyer_id = null, $data = array() ) {
+		
+		$message	=& $data['message'];
+	
+		date_default_timezone_set("Asia/Taipei");
+		$created = date("Y-m-d", $_SERVER['REQUEST_TIME']);
+		
+		$status = 'normal';
+		$display = 'y';
+		
+		$query = "INSERT INTO bulletin SET
+				message			=	:message,
+				created 		= 	:created,
+				status			=	:status,
+				display			=	:display";
+		
+		$params = array(
+				'message'  		=> $message,
+				'created'         => $created,
+				'status'         => $status,
+				'display'   	 => $display
+		);
+		
+		$result = self::_insert( $query, $params );
+
+		/*
+        if( is_null($buyer_id) ) return false;
+        //  $param =& param is equivalent to $param = isset($param)) ? $albert : NULL;
+        $imei_code      =& $data['imei_code'];
+        $dealer_num     =& $data['dealer_num'];
+        $dealer_name    =& $data['dealer_name'];
+        $dealer_shop    =& $data['dealer_shop'];
+
+        $today = date("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
+        $service_expired = date('Y-m-d H:i:s', strtotime($today . " + 366 day"));
+        $warranty_expired = date('Y-m-d H:i:s', strtotime($today . " + 372 day"));
+
+        $query = "INSERT INTO `devices` SET
+                 `buyer_id`         = :buyer_id,
+                 `imei_code`        = :imei_code,
+                 `dealer_num`       = :dealer_num,
+                 `dealer_name`      = :dealer_name,
+                 `dealer_shop`      = :dealer_shop,
+                 `actived_date`      = NOW(),
+                 `service_expired`  = :service_expired,
+                 `warranty_expired` = :warranty_expired,
+                 `created`          = NOW(),
+                 `modified`         = NOW()";
+
+        $params = array(
+            'buyer_id'          => $buyer_id,
+            'imei_code'         => $imei_code,
+            'dealer_num'        => $dealer_num,
+            'dealer_name'       => $dealer_name,
+            'dealer_shop'       => $dealer_shop,
+            'service_expired'   => $service_expired,
+            'warranty_expired'  => $warranty_expired
+        );
+
+        $result = self::_insert( $query, $params );
+		*/
+        return $result === true ? self::get_last_insert_id() : false;
+	}
 }

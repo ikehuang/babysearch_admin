@@ -13,7 +13,7 @@
 			<li>|</li>
 		 -->
 			<li>
-				<a href="/admin/import">新增</a>
+				<a href="/admin/add_bulletin">新增</a>
 			</li>
 		</ul>
 		
@@ -56,9 +56,9 @@
 					<td>
 						<p class="table-content ellipsis">
 						{% if l.status == 'normal' %}
-						<font margin-left:-5px;">{{ '發佈中' }}</font>
+						<font style="margin-left:-5px;">{{ '發佈中' }}</font>
 						{% else %}
-						<font margin-left:-5px;">{{ 'N/A' }}</font>
+						<font style="margin-left:-5px;">{{ 'N/A' }}</font>
 						{% endif %}
 						</p>
 					</td> 
@@ -72,7 +72,7 @@
 						</p>
 					</td>
 					<td>
-						<a href="/admin/delete/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:15px;"><strong>X</strong></font></p></div></a>
+						<a href="/admin/delete/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:10px;"><strong>X</strong></font></p></div></a>
 					</td>
 					<td>
 					</td>

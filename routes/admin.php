@@ -424,6 +424,52 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
             //$app->redirect('/admin/add');
         //}
     });
+    	$app->post('/add_bulletin', $authenticate_admin, function() use ( $app ) {
+    		$req = $app->request->params();
+    	
+    		$product_data = array(
+    				'message'     => $req['message']
+    		);
+    		/*
+    		 $product_data = array(
+    		 		'imei_code'     => $req['imei_num'],
+    		 		'dealer_name'   => $req['dealer_name'],
+    		 		'dealer_num'    => $req['dealer_num'],
+    		 		'dealer_shop'   => $req['dealer_shop']
+    		 );
+    	
+    		$buyer_data = array(
+    				'name'          => $req['name'],
+    				'email'         => $req['email'],
+    				'phone'         => $req['phone'],
+    				'gender'        => $req['gender'],
+    				'zipcode'       => $req['zip_code'],
+    				'address'       => $req['address']
+    		);
+    		// $buyer = Buyer::get_by_email( $buyer_data['email'] );
+    		// $buyer_id = $buyer === false ? Buyer::add( $buyer_data ) : $buyer['id'];
+    		$buyer_id = Buyer::add( $buyer_data );
+    		*/
+    		//if( $buyer_id !== false ) {
+    		//$product = Product::get_by_imei_code( $product_data['serial_number'] );
+    		//if( $product === false ) {
+    			$result = Product::add_bulletin( null, $product_data );
+    			if( $result !== false ) {
+    				$app->redirect('/admin/bulletin');
+    			} else {
+    				//sBuyer::delete( $buyer_id );
+    				$app->flash('error', '寫入資料錯誤');
+    				$app->redirect('/admin/add_bulletin');
+    			}
+    		//} else {
+    			//$app->flash('error', '此serial number('.$product_data['serial_number'].')已存在!');
+    			//$app->redirect('/admin/add');
+    		//}
+    		//} else {
+    		//$app->flash('error', '寫入資料錯誤');
+    		//$app->redirect('/admin/add');
+    		//}
+    	});
     $app->post('/update_order', $authenticate_admin, function() use ( $app ) {
         $req = $app->request->params();
 		

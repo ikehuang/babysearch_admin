@@ -35,6 +35,30 @@ final class Product extends DBModule {
         		ORDER BY did limit {$start},{$limit}";
         return self::_query_all( $query );
     }
+    public static function get_list_serial($page = 1) {
+    	$limit = 20;
+    	$start = $page == 1 ? 0 : ($page-1)*$limit;
+    	$start = $start <= 0 ? 0 : $start;
+    
+    	$query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    	FROM devices
+    	LEFT JOIN users
+    	ON devices.sso_id=users.sso_id
+    	ORDER BY devices.serial_number limit {$start},{$limit}";
+    	return self::_query_all( $query );
+    }
+    public static function get_list_created($page = 1) {
+    	$limit = 20;
+    	$start = $page == 1 ? 0 : ($page-1)*$limit;
+    	$start = $start <= 0 ? 0 : $start;
+    
+    	$query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    	FROM devices
+    	LEFT JOIN users
+    	ON devices.sso_id=users.sso_id
+    	ORDER BY devices.created limit {$start},{$limit}";
+    	return self::_query_all( $query );
+    }
     public static function get_list_qtag($page = 1) {
 	$limit = 20;
   	$start = $page == 1 ? 0 : ($page-1)*$limit;

@@ -867,7 +867,7 @@ final class Product extends DBModule {
 		$query = "UPDATE bulletin SET
 		status  		= :status,
 		display  		= :display,
-		push			= :push,
+		push			= :push
 		WHERE id = :id";
 	
 		$params = array(

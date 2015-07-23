@@ -856,21 +856,25 @@ final class Product extends DBModule {
 		if($bulletin['display'] == 'y') {
 			$bulletin['display'] = 'n';
 			$bulletin['status'] = 'close';
+			$bulletin['push'] = 'Enable';
 		}
 		else {
 			$bulletin['display'] = 'y';
 			$bulletin['status'] = 'normal';
+			$bulletin['push'] = 'Disable';
 		}
 		
 		$query = "UPDATE bulletin SET
 		status  		= :status,
-		display  		= :display
+		display  		= :display,
+		push			= :push,
 		WHERE id = :id";
 	
 		$params = array(
 			'id' => $id,
 			'status'   => $bulletin['status'],
-			'display'   => $bulletin['display']
+			'display'   => $bulletin['display'],
+			'push'   => $bulletin['push']
 		);
 	
 		return self::_update( $query, $params );

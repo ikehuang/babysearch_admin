@@ -72,7 +72,14 @@
 						</p>
 					</td>
 					<td>
-						<a href=""><p class="table-content ellipsis"><font style="color:blue;margin-left:10px;">推播</font></p></a>
+						<p class="table-content ellipsis">
+						{% if l.push == 'Enable' %}
+						<a href=""><font style="color:blue;margin-left:10px;">{{ l.push }}</font></p></a>
+						{% elseif l.push == 'Disable' %}
+						<a href=""><font style="color:blue;margin-left:10px;">{{ l.push }}</font></p></a>
+						{% else %}
+						<a href=""><font style="color:blue;margin-left:10px;">推播</font></p></a>
+						{% endif %}
 					</td>
 					<td>
 						<a href="/admin/delete_bulletin/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:10px;"><strong>X</strong></font></p></div></a>

@@ -423,6 +423,26 @@ final class Product extends DBModule {
 				}
 				
 				self::_update( $query, $params );
+				
+				//delete photos
+				$query = "DELETE FROM photos
+    			WHERE did = :did";
+				 
+				$params = array(
+						'did' => $result['did']
+				);
+			
+				self::_delete( $query, $params);
+				
+				//delete guestbook
+				$query = "DELETE FROM guestbook
+    			WHERE did = :did";
+					
+				$params = array(
+						'did' => $result['did']
+				);
+					
+				self::_delete( $query, $params);
 			}
 		}
 	}

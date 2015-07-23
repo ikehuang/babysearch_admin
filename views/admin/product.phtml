@@ -10,9 +10,9 @@
 		{% else %}
 		<header><h3 class="tabs_involved">產品資訊</h3>
 		<ul class="tabs">
-			<li><a id="stop">停用</a></li>
+			<li><a href="/admin/invalid/{{ p.serial_number }}">停用</a></li>
 			<li>|</li>
-			<li><a id="clear">清空資料</a></li>
+			<li><a href="/admin/reset/{{ p.serial_number }}">清空資料</a></li>
 			<li>|</li>
 			<li><a class="edit" href="javascript:void(0);">修改</a></li>
 		</ul>

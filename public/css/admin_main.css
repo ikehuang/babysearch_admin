@@ -120,6 +120,8 @@ section#main, section#secondary_bar .breadcrumbs_container {
 .quick_search input[type=text] { width: 70%; }
 
 .tablesorter td {
+	max-width:500px;
+	overflow:hidden;
   padding-right: 0;
 }
 .ellipsis {

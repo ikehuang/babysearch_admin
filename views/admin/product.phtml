@@ -25,6 +25,7 @@
 					<th>期限</th>
 					<th>註册用户</th>
 					<th>狀態</th>
+					<th>移除</th>
 				</tr> 
 			</thead> 
 			<tbody> 
@@ -82,6 +83,12 @@
 							{{ '停用' }}
 							{% endif %}
 						</p>
+					</td>
+					<td>
+					<!-- 確定要移除序號{{l.serial_number}}? -->
+						{% if l.status == 'new' %}
+						<a href="/admin/delete/{{l.serial_number}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;"><strong>X</strong></font></p></div></a>
+						{% endif %}
 					</td>
 				</tr>
 			</tbody> 

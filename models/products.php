@@ -306,7 +306,7 @@ final class Product extends DBModule {
 			
 			$result = self::_query( $query, $params );
 			
-			switch($result->type) {
+			switch($result.type) {
 				
 				case "Pets":
 					$query = "UPDATE pet_info SET
@@ -335,7 +335,7 @@ final class Product extends DBModule {
 					WHERE did	=	:did";
 					
 					$params = array(
-							'did'  				=> $result->did,
+							'did'  				=> $result.did,
 							'name'         => $reset,
 							'sex'         => $reset,
 							'birthday'         => $reset,
@@ -383,7 +383,7 @@ final class Product extends DBModule {
 					WHERE did	=	:did";
 						
 					$params = array(
-							'did'  				=> $result->did,
+							'did'  				=> $result.did,
 							'firstname'         => $reset,
 							'lastname'         => $reset,
 							'nickname'         => $reset,
@@ -411,7 +411,7 @@ final class Product extends DBModule {
 					WHERE did	=	:did";
 					
 					$params = array(
-							'did'  				=> $result->did,
+							'did'  				=> $result.did,
 							'name'         => $reset,
 							'description'         => $reset
 					);

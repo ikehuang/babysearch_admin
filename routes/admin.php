@@ -564,8 +564,14 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     			$req = $app->request->params();
     			 
     			$result = Product::toggle_bulletin( $id );
+    			
+    			$bulletin = Product::get_bulletin_by_imei_code( $id );
+    			
     			if( $result !== false ) {
-    				$app->flash('toggle_bulletin_success', '公告巳發佈上架...');
+    				if($bulletin['status' == 'normal'])
+    					$app->flash('toggle_bulletin_success', '公告巳發佈上架...');
+    				else
+    					$app->flash('toggle_bulletin_success', '公告巳下架...');
     			} else {
     				$app->flash('toggle_bulletin_error', '寫入資料錯誤');
     			}

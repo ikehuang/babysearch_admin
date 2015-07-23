@@ -854,17 +854,23 @@ final class Product extends DBModule {
 	
 		$bulletin = self::get_bulletin_by_imei_code( $id );
 		
-		if($bulletin['display'] == 'y')
+		if($bulletin['display'] == 'y') {
 			$bulletin['display'] = 'n';
-		else
+			$bulletin['status'] = 'close';
+		}
+		else {
 			$bulletin['display'] = 'y';
+			$bulletin['status'] = 'normal';
+		}
 		
 		$query = "UPDATE bulletin SET
+		status  		= :status,
 		display  		= :display
 		WHERE id = :id";
 	
 		$params = array(
 			'id' => $id,
+			'status'   => $bulletin['status'],
 			'display'   => $bulletin['display']
 		);
 	

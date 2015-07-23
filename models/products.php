@@ -407,6 +407,63 @@ final class Product extends DBModule {
         return self::_update( $query, $params );
 
     }
+    public static function update_bulletin( $buyer_id = null, $id = null, $data ) {
+    	 
+    	$message         =& $data['message'];
+    	 
+    	//date_default_timezone_set("Asia/Taipei");
+    	//$today = date("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
+    	//$expired = date('Y-m-d', strtotime($today . " + " . $membership . " year"));
+    	 
+    	//if($membership == 99)
+    	//$expired = '9999-12-31';
+    	 
+    	$expired = $membership;
+    	 
+    	$query = "UPDATE devices SET
+                 $message  		= :message
+                 WHERE id = :id";
+    
+    	$params = array(
+    			'id' => $id,
+    			'message'   => $message
+    	);
+    	 
+    	/*
+    	 if( is_null($buyer_id) || is_null($imei_code) ) return false;
+    	//  $param =& param is equivalent to $param = isset($param)) ? $albert : NULL;
+    	$dealer_num         =& $data['dealer_num'];
+    	$dealer_name        =& $data['dealer_name'];
+    	$dealer_shop        =& $data['dealer_shop'];
+    	$new_imei           =& $data['imei_num'];
+    	$service_expired    =& $data['service_expired'];
+    	$warranty_expired   =& $data['warranty_expired'];
+    
+    	$query = "UPDATE `devices` SET
+    	`dealer_num`       = :dealer_num,
+    	`dealer_name`      = :dealer_name,
+    	`dealer_shop`      = :dealer_shop,
+    	`imei_code`        = :new_imei,
+    	`service_expired`  = :service_expired,
+    	`warranty_expired` = :warranty_expired,
+    	`modified`     = NOW()
+    	WHERE buyer_id = :buyer_id AND imei_code = :imei_code";
+    
+    	$params = array(
+    			'buyer_id'          => $buyer_id,
+    			'imei_code'         => $imei_code,
+    			'dealer_num'        => $dealer_num,
+    			'dealer_name'       => $dealer_name,
+    			'dealer_shop'       => $dealer_shop,
+    			'new_imei'          => $new_imei,
+    			'service_expired'   => $service_expired,
+    			'warranty_expired'  => $warranty_expired
+    	);
+    	*/
+    
+    	return self::_update( $query, $params );
+    
+    }
     public static function update_register( $user_id = null, $imei_code = null, $pet_type, $pet_name ) {
         if( is_null($user_id) || is_null($imei_code) ) return false;
 

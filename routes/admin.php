@@ -545,6 +545,51 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
         }
         */
     });
+    	$app->post('/update_bulletin', $authenticate_admin, function() use ( $app ) {
+    		$req = $app->request->params();
+    	
+    		$product_data = array(
+    				'message'   		=> $req['message']
+    		);
+    	
+    		/*
+    		 $product_data = array(
+    		 		'dealer_name'       => $req['dealer_name'],
+    		 		'dealer_num'        => $req['dealer_num'],
+    		 		'dealer_shop'       => $req['dealer_shop'],
+    		 		'imei_num'          => $req['new_imei_num'],
+    		 		'service_expired'   => $req['service_expired'],
+    		 		'warranty_expired'  => $req['warranty_expired']
+    		 );
+    	
+    		$buyer_data = array(
+    				'name'          => $req['name'],
+    				'email'         => $req['email'],
+    				'phone'         => $req['phone'],
+    				'gender'        => $req['gender'],
+    				'zipcode'       => $req['zip_code'],
+    				'address'       => $req['address']
+    		);
+    	
+    		$result = Buyer::update( $req['buyer_id'], $buyer_data );
+    	
+    		if( $result !== false ) {
+    		$result = Product::update( $req['buyer_id'], $req['imei_num'], $product_data );
+    		*/
+    		$result = Product::update_bulletin( null, $req['id'], $product_data );
+    		if( $result !== false ) {
+    			$app->redirect('/admin/bulletin');
+    		} else {
+    			$app->flash('error', '寫入資料錯誤');
+    			$app->redirect('/admin/edit_bulletin/'.$req['id']);
+    		}
+    		/*
+    		 } else {
+    		$app->flash('error', '寫入資料錯誤');
+    		$app->redirect('/admin/product/'.$req['imei_num']);
+    		}
+    		*/
+    	});
     $app->get('/product(/:imei_code)', $authenticate_admin, function( $imei_code = null ) use ( $app ) {
         $admin = SessionNative::read('ADMIN');
         $product = Product::get_by_imei_code( $imei_code );
@@ -554,6 +599,15 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
             'p'         => $product
         ));
     });
+    	$app->get('/edit_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
+    		$admin = SessionNative::read('ADMIN');
+    		$product = Product::get_by_imei_code( $id );
+    		$app->render('admin/edit_bulletin.phtml', array(
+    				'page_name' => '編輯',
+    				'admin'     => $admin,
+    				'b'         => $bulletin
+    		));
+    	});
     $app->get('/pending', $authenticate_admin, function() use ( $app ) {
         $admin = SessionNative::read('ADMIN');
         $list = Product::get_list_by_pending();

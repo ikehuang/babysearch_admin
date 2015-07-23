@@ -1,0 +1,275 @@
+{% extends 'admin/layout.phtml' %}
+{% block slidebar %} {% include 'admin/slidebar.phtml' %}{% endblock %}
+{% block content %}
+<section id="main" class="column">
+	<article class="module width_full">
+		{% if p|length <= 0 %}
+		<table class="tablesorter" cellspacing="0"> 
+			<tr><td style="text-align:center;">查無此商品</td></tr>
+		</table>
+		{% else %}
+		<header><h3 class="tabs_involved">公告資訊</h3>
+		<ul class="tabs">
+			<li><a class="edit" href="javascript:void(0);">修改</a></li>
+		</ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr>  
+					<th>新增日期</th> 
+					<th>公告內容</th> 
+					<th>狀態</th> 
+					<th>發佈/下架</th> 
+					<th>移除</th>
+				</tr> 
+			</thead> 
+			<tbody> 
+				<tr> 
+					<td>{{ b.created }}</td> 
+					<td><a class="imei_code ellipsis" href="/admin/product/{{ b.id }}" title="{{ b.id }}">{{ b.message }}</a>
+					</td> 
+					<td>
+						<p class="table-content ellipsis">
+						{% if b.status == 'normal' %}
+						{{ '發佈中' }}
+						{% else %}
+						{{ 'N/A' }}
+						{% endif %}
+						</p>
+					</td> 
+					<td>
+						<p class="imei_code ellipsis" title="{{ b.display }}">
+						{% if b.display == 'y' %}
+						<font style="color:blue;margin-left:15px;">{{ '發佈' }}</font>
+						{% else %}
+						<font style="color:red;margin-left:15px;">{{ '下架' }}</font>
+						{% endif %}
+						</p>
+					</td>
+					<td>
+						<a href="/admin/delete_bulletin/{{b.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:10px;"><strong>X</strong></font></p></div></a>
+					</td>
+				</tr>
+			</tbody> 
+			</table>
+			</div><!-- end of #tab1 -->
+			<!-- 
+			<div id="tab2" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr>  
+					<th>狀態</th> 
+					<th>移除</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr> 
+			</thead> 
+			<tbody> 
+				<tr>  
+					<td>
+						<p class="table-content ellipsis">
+							{% if p.status == 'new' %}
+							{{ '未註册' }}
+							{% elseif p.status == 'normal' %}
+							{{ '正常' }}
+							{% elseif p.status == 'lost' %}
+							{{ '遺失' }}
+							{% elseif p.status == 'invalid' %}
+							{{ '停用' }}
+							{% endif %}
+						</p>
+					</td> 
+					<td>
+						<p>
+							{% set gender = p.gender == 'male' ? '男' : '女' %}
+							{{ gender }}
+						</p>
+					</td> 
+					<td><p>{{ p.zipcode }}</p></td>
+					<td><p>{{ p.address }}</p></td>
+					<td><p>{{ p.phone }}</p> </td>
+					<td><p>{{ p.email }}</p> </td> 
+				</tr>
+			</tbody> 
+			</table>
+			</div> end of #tab2 
+			 -->
+			 <!--
+		</div> end of .tab_container 
+
+		<header><h3 class="tabs_involved">註冊資訊</h3></header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			{% if p.user_id is not empty %}
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr>  
+					<th>帳號</th> 
+					<th>姓名</th> 
+					<th>性別</th>
+					<th>郵遞區號</th>
+					<th>地址</th>
+					<th>手機號碼</th>
+				</tr> 
+			</thead> 
+			<tbody> 
+				<tr>  
+					<td><p>{{ p.user_email }}</p> </td>
+					<td><p>{{ p.user_name }}</p></td> 
+					<td>
+						<p>
+							{% set gender = p.user_gender == 'male' ? '男' : '女' %}
+							{{ gender }}
+						</p>
+					</td> 
+					<td><p>{{ p.user_zipcode }}</p></td>
+					<td><p>{{ p.user_address }}</p></td>
+					<td><p>{{ p.user_phone }}</p> </td>
+				</tr>
+			</tbody> 
+			</table>
+			</div>--><!-- end of #tab1 
+			<div id="tab2" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr>  
+					<th>寵物類型</th> 
+					<th>寵物名字</th>
+					<th>SIM卡使用期限</th>
+					<th>產品保固日期</th>
+					<th>商品積分</th>
+				</tr> 
+			</thead> 
+			<tbody> 
+				<tr>  
+					<td><p>{{ p.pet_type }}</p></td> 
+					<td><p>{{ p.pet_name }}</p></td>
+					<td><p>{{ p.service_expired|date('Y-m-d') }}</p></td>
+					<td><p>{{ p.warranty_expired|date('Y-m-d') }}</p> </td>
+					<td><p>{{ p.points }}</p></td> 
+				</tr>
+			</tbody> 
+			</table>
+			{% else %}
+			<table class="tablesorter" cellspacing="0"> 
+				<tr><td style="text-align:center;">此商品尚未註冊</td></tr>
+			</table>
+			{% endif %}
+			</div>--><!-- end of #tab2 -->
+		</div><!-- end of .tab_container -->
+		{% endif %}
+	</article><!-- end of content manager article -->
+	<div class="spacer"></div>
+	<div class="update-buyer">
+		<header><h3 class="tabs_involved">編輯</h3></header>
+		<div class="module_content">
+			<form class="add-form update-form" method="post" action="/admin/update_bulletin">
+			
+				<input type="hidden" name="imei_num" value="{{ b.id }}" />
+			<!-- 
+				<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+				<input type="hidden" name="buyer_id" value="{{ p.buyer_id }}">
+				<input type="hidden" name="imei_num" value="{{ p.imei_code }}" />
+				<fieldset>
+					<label>經銷商</label>
+					<div class="clear"></div>
+					<div class="trisect div-block">
+						<input type="text" placeholder="編號" value="{{ p.dealer_num }}" name="dealer_num" required />
+					</div>
+					<div class="trisect div-block">
+						<input type="text" placeholder="名稱" value="{{ p.dealer_name }}" name="dealer_name" required />
+					</div>
+					<div class="trisect div-block">
+						<input type="text" placeholder="分店代碼" value="{{ p.dealer_shop }}" name="dealer_shop" />
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="trisect div-block">
+						<label>IMEI條碼</label>
+						<input type="text" value="{{ p.imei_code }}" name="new_imei_num" required />
+					</div>
+					<div class="trisect div-block">
+						<label style="width:100px;">SIM卡使用期限</label>
+						<input type="text" class="datepicker" name="service_expired" value="{{ p.service_expired|date('Y-m-d') }}" required />
+					</div>
+					<div class="trisect div-block">
+						<label style="width:100px;">產品保固日期</label>
+						<input type="text" class="datepicker" name="warranty_expired" value="{{ p.warranty_expired|date('Y-m-d') }}" required />
+					</div>
+				</fieldset>
+			 -->
+				<fieldset>
+			<!-- 
+					<label>購買人資訊</label>
+					<div class="clear"></div>
+					<input class="name" type="text" placeholder="姓名" name="name" value="{{ p.name }}" required />
+					{% if p.gender == 'male' %}
+					<label class="gender">男<input type="radio" name="gender" value="male" checked /></label>
+					<label class="gender">女<input type="radio" name="gender" value="female" /></label>
+					{% else %}
+					<label class="gender">男<input type="radio" name="gender" value="male" /></label>
+					<label class="gender">女<input type="radio" name="gender" value="female" checked /></label>
+					{% endif %}
+					<input class="zip-code" type="text" placeholder="郵遞區號" name="zip_code" value="{{ p.zipcode }}" required />
+					<input class="address" type="text" placeholder="地址" name="address" value="{{ p.address }}" required />
+					<div class="half div-block">
+						<input type="text" placeholder="手機號碼" name="phone" value="{{ p.phone }}" required />
+					</div>
+					<div class="half div-block">
+						<input type="email" placeholder="email" name="email" value="{{ p.email }}"/>
+					</div>
+					<div class="clear"></div>
+			 -->
+			 <!-- 
+					<div>
+						<label>公告</label>
+						<label><strong>{{ b.serial_number }}</strong></label>
+					</div>
+			
+					<div class="clear"></div>
+			 -->
+					<div>
+						<label>公告內容</label>
+						<label>
+							<textarea rows="10" cols="60" name="message"></textarea>
+							<!-- 
+							<input type="date" name="membership">
+							
+							<select name="membership">
+				        		<option value="1">1年</option>
+				        		<option value="3">3年</option>
+				        		<option value="99">永久</option>
+			        		</select>
+			        		 -->
+		        		</label>
+	        		</div>
+	        		<div class="clear"></div>
+					<input type="submit" value="確定" class="alt_btn">
+					<input type="button" value="取消" class="btn cancel">
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+<link href="https://code.jquery.com/ui/1.11.2/themes/start/jquery-ui.min.css" rel="stylesheet">											
+<script>
+	$(function() {
+		$(".datepicker").datepicker({ dateFormat: 'yy-mm-dd'});
+		$('.update-form').submit(function() {
+			if( $('input[name=new_imei_num]').val().length != 15 ) {
+				alert('IMEI條碼輸入有誤！');
+				return false;
+			}
+		});
+	});
+</script>
+{% endblock %}

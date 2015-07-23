@@ -568,7 +568,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     			$bulletin = Product::get_bulletin_by_imei_code( $id );
     			
     			if( $result !== false ) {
-    				if($bulletin['status' == 'normal'])
+    				if($bulletin['status'] == 'normal')
     					$app->flash('toggle_bulletin_success', '公告巳發佈上架...');
     				else
     					$app->flash('toggle_bulletin_success', '公告巳下架...');

@@ -577,6 +577,23 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     			}
     			$app->redirect('/admin/bulletin');
     		});
+    			$app->get('/push_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
+    				$req = $app->request->params();
+    			
+    				$result = Product::push_bulletin( $id );
+    				 
+    				$bulletin = Product::get_bulletin_by_imei_code( $id );
+    				 
+    				if( $result !== false ) {
+    					if($bulletin['status'] == 'normal')
+    						$app->flash('toggle_bulletin_success', '公告巳發佈上架...');
+    					else
+    						$app->flash('toggle_bulletin_success', '公告巳下架...');
+    				} else {
+    					$app->flash('toggle_bulletin_error', '寫入資料錯誤');
+    				}
+    				$app->redirect('/admin/bulletin');
+    			});
     $app->get('/product(/:imei_code)', $authenticate_admin, function( $imei_code = null ) use ( $app ) {
         $admin = SessionNative::read('ADMIN');
         $product = Product::get_by_imei_code( $imei_code );

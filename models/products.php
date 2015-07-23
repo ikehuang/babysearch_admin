@@ -879,5 +879,5 @@ final class Product extends DBModule {
 	
 		return self::_update( $query, $params );
 	
-		}
+	}
 }

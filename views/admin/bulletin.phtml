@@ -73,12 +73,10 @@
 					</td>
 					<td>
 						<p class="table-content ellipsis">
-						{% if l.push == 'Enable' %}
-						<a href=""><font style="color:blue;margin-left:10px;">{{ l.push }}</font></p></a>
-						{% elseif l.push == 'Disable' %}
-						<a href=""><font style="color:blue;margin-left:10px;">{{ l.push }}</font></p></a>
-						{% else %}
+						{% if l.status == 'normal' %}
 						<a href=""><font style="color:blue;margin-left:10px;">推播</font></p></a>
+						{% else %}
+						<a href=""><font style="color:blue;margin-left:10px;"></font></p></a>
 						{% endif %}
 					</td>
 					<td>

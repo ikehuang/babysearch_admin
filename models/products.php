@@ -566,11 +566,8 @@ final class Product extends DBModule {
     	 
     	//$expired = $membership;
     	
-    	var_dump($message);
-    	var_dump($id);die();
-    	
     	$query = "UPDATE devices SET
-                 $message  		= :message
+                 message  		= :message
                  WHERE id = :id";
     
     	$params = array(

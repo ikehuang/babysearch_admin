@@ -306,6 +306,8 @@ final class Product extends DBModule {
 			
 			$result = self::_query( $query, $params );
 			
+			var_dump($result);die();
+			
 			switch($result.type) {
 				
 				case "Pets":

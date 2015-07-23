@@ -86,8 +86,8 @@
 					</td>
 					<td>
 					<!-- 確定要移除序號{{l.serial_number}}? -->
-						{% if l.status == 'new' %}
-						<a href="/admin/delete/{{l.serial_number}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;"><strong>X</strong></font></p></div></a>
+						{% if p.status == 'new' %}
+						<a href="/admin/delete/{{p.serial_number}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;"><strong>X</strong></font></p></div></a>
 						{% endif %}
 					</td>
 				</tr>

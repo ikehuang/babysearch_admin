@@ -296,7 +296,7 @@ final class Product extends DBModule {
 					'lost_contact_id_2'         => $reset,
 					'lost_contact_id_3'         => $reset
 			);
-	
+var_dump("update device null");die();
 			self::_update( $query, $params );
 var_dump("update device null");	
 			//also delete tag info

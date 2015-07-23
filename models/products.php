@@ -298,7 +298,7 @@ var_dump("update device null");
 			);
 var_dump("update device null1");
 			self::_update( $query, $params );
-var_dump("update device null2");	
+var_dump("update device null2");die();	
 			//also delete tag info
 			$query = "select * from devices where serial_number = :serial_number";
 			
@@ -424,7 +424,7 @@ var_dump("update device null2");
 				
 				self::_update( $query, $params );
 var_dump("update info null3");
-var_dump($query);			
+var_dump($query);die();			
 				//delete photos
 				$query = "DELETE FROM photos
     			WHERE did = :did";
@@ -434,7 +434,7 @@ var_dump($query);
 				);
 			
 				self::_delete( $query, $params);
-var_dump("delete photo");			
+var_dump("delete photo");die();			
 				//delete guestbook
 				$query = "DELETE FROM guestbook
     			WHERE did = :did";

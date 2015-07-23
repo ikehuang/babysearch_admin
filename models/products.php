@@ -296,9 +296,9 @@ final class Product extends DBModule {
 					'lost_contact_id_2'         => $reset,
 					'lost_contact_id_3'         => $reset
 			);
-var_dump("update device null");die();
+var_dump("update device null");
 			self::_update( $query, $params );
-var_dump("update device null");	
+var_dump("update device null2");	
 			//also delete tag info
 			$query = "select * from devices where serial_number = :serial_number";
 			
@@ -423,7 +423,7 @@ var_dump("update device null");
 				}
 				
 				self::_update( $query, $params );
-var_dump("update info null");
+var_dump("update info null3");
 var_dump($query);			
 				//delete photos
 				$query = "DELETE FROM photos

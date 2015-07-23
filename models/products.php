@@ -239,12 +239,11 @@ final class Product extends DBModule {
 		$status = 'new';
 		
 		$array = (explode(",",$list));
-var_dump("update device null");	
+
 		foreach($array as $serial_number) {
 				
 			$query = "UPDATE devices SET
 					status			=	:status,
-					type			=	:type,
 					name			=	:name,
 					photo			=	:photo,
 					message			=	:message,
@@ -272,7 +271,6 @@ var_dump("update device null");
 			$params = array(
 					'serial_number'  => $serial_number,
 					'status'         => $status,
-					'type'         => $reset,
 					'name'         => $reset,
 					'photo'         => $reset,
 					'message'         => $reset,
@@ -296,9 +294,9 @@ var_dump("update device null");
 					'lost_contact_id_2'         => $reset,
 					'lost_contact_id_3'         => $reset
 			);
-var_dump("update device null1");
+
 			self::_update( $query, $params );
-var_dump("update device null2");	
+	
 			//also delete tag info
 			$query = "select * from devices where serial_number = :serial_number";
 			
@@ -423,8 +421,7 @@ var_dump("update device null2");
 				}
 				
 				self::_update( $query, $params );
-var_dump("update info null3");
-var_dump($query);die();			
+		
 				//delete photos
 				$query = "DELETE FROM photos
     			WHERE did = :did";
@@ -434,7 +431,7 @@ var_dump($query);die();
 				);
 			
 				self::_delete( $query, $params);
-var_dump("delete photo");die();			
+		
 				//delete guestbook
 				$query = "DELETE FROM guestbook
     			WHERE did = :did";
@@ -444,7 +441,7 @@ var_dump("delete photo");die();
 				);
 					
 				self::_delete( $query, $params);
-var_dump("delete guestbook");die();
+
 			}
 		}
 	}

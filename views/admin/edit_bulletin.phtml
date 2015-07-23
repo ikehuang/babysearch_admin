@@ -29,7 +29,7 @@
 			<tbody> 
 				<tr> 
 					<td>{{ b.created }}</td> 
-					<td><a class="imei_code ellipsis" href="/admin/product/{{ b.id }}" title="{{ b.id }}">{{ b.message }}</a>
+					<td><a class="imei_code ellipsis" href="/admin/edit_bulletin/{{ b.id }}" title="{{ b.id }}">{{ b.message }}</a>
 					</td> 
 					<td>
 						<p class="table-content ellipsis">
@@ -236,9 +236,9 @@
 			 -->
 					<div>
 						<label>公告內容</label>
+						<textarea rows="10" cols="100" name="message"></textarea>
+						<!-- 
 						<label>
-							<textarea rows="10" cols="60" name="message"></textarea>
-							<!-- 
 							<input type="date" name="membership">
 							
 							<select name="membership">
@@ -246,8 +246,8 @@
 				        		<option value="3">3年</option>
 				        		<option value="99">永久</option>
 			        		</select>
-			        		 -->
 		        		</label>
+		        		 -->
 	        		</div>
 	        		<div class="clear"></div>
 					<input type="submit" value="確定" class="alt_btn">

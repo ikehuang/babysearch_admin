@@ -298,6 +298,129 @@ final class Product extends DBModule {
 			);
 	
 			self::_update( $query, $params );
+			
+			//also delete tag info
+			$query = "select * from devices where serial_number = :serial_number";
+			
+			$params = array( 'serial_number' => $serial_number );
+			
+			$result = self::_query( $query, $params );
+			
+			switch($result->type) {
+				
+				case "Pets":
+					$query = "UPDATE pet_info SET
+					name			=	:name,
+					sex			=	:sex,
+					birthday			=	:birthday,
+					height			=	:height,
+					weight			=	:weight,
+					temperament			=	:temperament,
+					talents			=	:talents,
+					description			=	:description,
+					chip_number			=	:chip_number,
+					desex			=	:desex,
+					vaccine_type			=	:vaccine_type,
+					bloodtype			=	:bloodtype,
+					bloodbank			=	:bloodbank,
+					disability			=	:disability,
+					insurance			=	:insurance,
+					hospital_name			=	:hospital_name,
+					hospital_phone			=	:hospital_phone,
+					hospital_address			=	:hospital_address,
+					hospital_city			=	:hospital_city,
+					hospital_district			=	:hospital_district,
+					hospital_postal			=	:hospital_postal,
+					hospital_country			=	:hospital_country
+					WHERE did	=	:did";
+					
+					$params = array(
+							'did'  				=> $result->did,
+							'name'         => $reset,
+							'sex'         => $reset,
+							'birthday'         => $reset,
+							'height'         => $reset,
+							'weight'         => $reset,
+							'temperament'         => $reset,
+							'talents'         => $reset,
+							'description'         => $reset,
+							'chip_number'         => $reset,
+							'desex'         => $reset,
+							'vaccine_type'         => $reset,
+							'bloodtype'         => $reset,
+							'bloodbank'         => $reset,
+							'disability'         => $reset,
+							'insurance'         => $reset,
+							'hospital_name'         => $reset,
+							'hospital_phone'         => $reset,
+							'hospital_address'         => $reset,
+							'hospital_city'         => $reset,
+							'hospital_district'         => $reset,
+							'hospital_postal'         => $reset,
+							'hospital_country'         => $reset
+					);
+					break;
+				case "Human":
+					$query = "UPDATE human_info SET
+					firstname			=	:firstname,
+					lastname			=	:lastname,
+					nickname			=	:nickname,
+					sex				=	:sex,
+					birthday			=	:birthday,
+					height			=	:height,
+					weight			=	:weight,
+					bloodtype			=	:bloodtype,
+					disease			=	:disease,
+					disability			=	:disability,
+					medications			=	:medications,
+					hospital_name			=	:hospital_name,
+					hospital_phone			=	:hospital_phone,
+					hospital_address			=	:hospital_address,
+					hospital_city			=	:hospital_city,
+					hospital_district			=	:hospital_district,
+					hospital_postal			=	:hospital_postal,
+					hospital_country			=	:hospital_country
+					WHERE did	=	:did";
+						
+					$params = array(
+							'did'  				=> $result->did,
+							'firstname'         => $reset,
+							'lastname'         => $reset,
+							'nickname'         => $reset,
+							'sex'         => $reset,
+							'birthday'         => $reset,
+							'height'         => $reset,
+							'weight'         => $reset,
+							'bloodtype'         => $reset,
+							'disease'         => $reset,
+							'disability'         => $reset,
+							'medications'         => $reset,
+							'hospital_name'         => $reset,
+							'hospital_phone'         => $reset,
+							'hospital_address'         => $reset,
+							'hospital_city'         => $reset,
+							'hospital_district'         => $reset,
+							'hospital_postal'         => $reset,
+							'hospital_country'         => $reset
+					);
+					break;
+				case "Valuables":
+					$query = "UPDATE valuable_info SET
+					name			=	:name,
+					description			=	:description,
+					WHERE did	=	:did";
+					
+					$params = array(
+							'did'  				=> $result->did,
+							'name'         => $reset,
+							'description'         => $reset
+					);
+					break;
+				default:
+					break;
+			}
+			
+			self::_update( $query, $params );
 		}
 	}
 	public static function reopen_status( $list ) {
@@ -418,7 +541,7 @@ final class Product extends DBModule {
     	//if($membership == 99)
     	//$expired = '9999-12-31';
     	 
-    	$expired = $membership;
+    	//$expired = $membership;
     	 
     	$query = "UPDATE devices SET
                  $message  		= :message

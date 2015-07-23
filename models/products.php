@@ -566,7 +566,7 @@ final class Product extends DBModule {
     	 
     	//$expired = $membership;
     	
-    	$query = "UPDATE devices SET
+    	$query = "UPDATE bulletin SET
                  message  		= :message
                  WHERE id = :id";
     

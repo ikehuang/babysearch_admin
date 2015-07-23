@@ -601,7 +601,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     });
     	$app->get('/edit_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
     		$admin = SessionNative::read('ADMIN');
-    		$product = Product::get_by_imei_code( $id );
+    		$bulletin = Product::get_by_imei_code( $id );
     		$app->render('admin/edit_bulletin.phtml', array(
     				'page_name' => '編輯',
     				'admin'     => $admin,

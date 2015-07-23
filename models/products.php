@@ -298,7 +298,7 @@ var_dump("update device null");
 			);
 var_dump("update device null1");
 			self::_update( $query, $params );
-var_dump("update device null2");die();	
+var_dump("update device null2");	
 			//also delete tag info
 			$query = "select * from devices where serial_number = :serial_number";
 			

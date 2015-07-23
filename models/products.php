@@ -298,7 +298,7 @@ final class Product extends DBModule {
 			);
 	
 			self::_update( $query, $params );
-			
+var_dump("update device null");	
 			//also delete tag info
 			$query = "select * from devices where serial_number = :serial_number";
 			
@@ -423,7 +423,8 @@ final class Product extends DBModule {
 				}
 				
 				self::_update( $query, $params );
-				
+var_dump("update info null");
+var_dump($query);			
 				//delete photos
 				$query = "DELETE FROM photos
     			WHERE did = :did";
@@ -433,7 +434,7 @@ final class Product extends DBModule {
 				);
 			
 				self::_delete( $query, $params);
-				
+var_dump("delete photo");			
 				//delete guestbook
 				$query = "DELETE FROM guestbook
     			WHERE did = :did";
@@ -443,6 +444,7 @@ final class Product extends DBModule {
 				);
 					
 				self::_delete( $query, $params);
+var_dump("delete guestbook");die();
 			}
 		}
 	}

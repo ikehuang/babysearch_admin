@@ -34,9 +34,9 @@
 					<th>新增日期</th> 
 					<th>公告內容</th> 
 					<th>狀態</th> 
-					<th>發佈/下架</th> 
-					<th>移除</th> 
-					<th></th>
+					<th>上/下架</th>
+					<th>推播至手機</th>
+					<th>移除</th> 			
 					<th></th>
 					<th></th>
 					<th></th>
@@ -56,7 +56,7 @@
 					<td>
 						<p class="table-content ellipsis">
 						{% if l.status == 'normal' %}
-						{{ '發佈中' }}
+						{{ '上架中' }}
 						{% else %}
 						{{ 'N/A' }}
 						{% endif %}
@@ -65,16 +65,17 @@
 					<td>
 						<p class="imei_code ellipsis" title="{{ l.display }}">
 						{% if l.display == 'y' %}
-						<font style="color:blue;margin-left:15px;">{{ '發佈' }}</font>
+						<a href="/admin/toggle_bulletin/{{l.id}}"><font style="color:blue;margin-left:15px;">{{ '上架' }}</font></a>
 						{% else %}
-						<font style="color:red;margin-left:15px;">{{ '下架' }}</font>
+						<a href="/admin/toggle_bulletin/{{l.id}}"><font style="color:red;margin-left:15px;">{{ '下架' }}</font>
 						{% endif %}
 						</p>
 					</td>
 					<td>
-						<a href="/admin/delete_bulletin/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:10px;"><strong>X</strong></font></p></div></a>
+						<a href=""><p class="table-content ellipsis"><font style="color:blue;margin-left:10px;">推播</font></p></a>
 					</td>
 					<td>
+						<a href="/admin/delete_bulletin/{{l.id}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;margin-left:10px;"><strong>X</strong></font></p></div></a>
 					</td>
 					<td>
 					</td>
@@ -206,6 +207,16 @@
 {% if flash.import_msg is defined %}
 <script>
 alert('{{ flash.import_msg }}');
+</script>
+{% endif %}
+{% if flash.toggle_bulletin_success is defined %}
+<script>
+alert('{{ flash.toggle_bulletin_success }}');
+</script>
+{% endif %}
+{% if flash.toggle_bulletin_error is defined %}
+<script>
+alert('{{ flash.toggle_bulletin_error }}');
 </script>
 {% endif %}
 

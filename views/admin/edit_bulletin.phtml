@@ -22,7 +22,7 @@
 					<th>新增日期</th> 
 					<th>公告內容</th> 
 					<th>狀態</th> 
-					<th>發佈/下架</th> 
+					<th>上架/下架</th> 
 					<th>移除</th>
 				</tr> 
 			</thead> 
@@ -34,7 +34,7 @@
 					<td>
 						<p class="table-content ellipsis">
 						{% if b.status == 'normal' %}
-						{{ '發佈中' }}
+						{{ '上架中' }}
 						{% else %}
 						{{ 'N/A' }}
 						{% endif %}
@@ -43,7 +43,7 @@
 					<td>
 						<p class="imei_code ellipsis" title="{{ b.display }}">
 						{% if b.display == 'y' %}
-						<font style="color:blue;margin-left:15px;">{{ '發佈' }}</font>
+						<font style="color:blue;margin-left:15px;">{{ '上架' }}</font>
 						{% else %}
 						<font style="color:red;margin-left:15px;">{{ '下架' }}</font>
 						{% endif %}

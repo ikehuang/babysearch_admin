@@ -849,4 +849,26 @@ final class Product extends DBModule {
 		*/
 		return self::_delete( $query, $params);
 	}
+	
+	public static function toggle_bulletin( $id ) {
+	
+		$bulletin = self::get_bulletin_by_imei_code( $id );
+		
+		if($bulletin['display'] == 'y')
+			$bulletin['display'] = 'n';
+		else
+			$bulletin['display'] = 'y';
+		
+		$query = "UPDATE bulletin SET
+		display  		= :display
+		WHERE id = :id";
+	
+		$params = array(
+			'id' => $id,
+			'display'   => $bulletin['display']
+		);
+	
+		return self::_update( $query, $params );
+	
+		}
 }

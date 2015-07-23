@@ -560,7 +560,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     			$app->redirect('/admin/edit_bulletin/'.$req['id']);
     		}
     	});
-    		$app->post('/toggle_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
+    		$app->get('/toggle_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
     			$req = $app->request->params();
     			 
     			$result = Product::toggle_bulletin( $id );

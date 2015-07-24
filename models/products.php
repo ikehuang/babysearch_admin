@@ -880,4 +880,52 @@ final class Product extends DBModule {
 		return self::_update( $query, $params );
 	
 	}
+	
+	public static function push_bulletin( $id ) {
+	
+		$bulletin = self::get_bulletin_by_imei_code( $id );
+		
+		$query = "SELECT *
+                FROM `devices`
+				WHERE status='normal'";
+
+        $result = self::_query_all( $query );
+        
+        $empty = '';
+     
+        foreach($result as $device) {
+        	
+        	//$mobiles = Mobile::find(array("conditions" => "sso_id = '{$device->sso_id}' and token is not null and token != ''", "order" => "mid desc"));
+        	$query = "SELECT *
+                FROM mobiles
+				WHERE sso_id = :sso_id and token is not null and token != :empty
+        		ORDER BY mid desc";
+        	
+        	$params = array(
+        			'sso_id' => $device->sso_id,
+        			'empty'   => $empty
+        	);
+        	
+        	$mobiles = self::_query_all( $query, $params );
+        	
+        	if(!empty($mobiles)) {
+        		$android_send = "N";
+        		$apple_send = "N";
+        		foreach($mobiles as $mobile) {
+        			if($android_send == 'N') {
+        				
+        				$android_send  = $this->_send_android_notification($bulletin['message'], $device['serial_number'], $mobile['token']);
+        			}
+        				
+        			if($apple_send == "N") {
+        				$apple_send = $this->_send_apple_notification($bulletin['message'], $device['serial_number'], $mobile['token']);
+        					
+        			}
+        		}
+        	}
+        	
+        	//stop here...
+        }
+	
+	}
 }

@@ -74,7 +74,7 @@
 					<td>
 						<p class="table-content ellipsis">
 						{% if l.status == 'normal' %}
-						<a href=""><font style="color:blue;margin-left:10px;">推播</font></p></a>
+						<a href="/admin/push_bulletin/{{l.id}}"><font style="color:blue;margin-left:10px;">推播</font></p></a>
 						{% else %}
 						<a href=""><font style="color:blue;margin-left:10px;"></font></p></a>
 						{% endif %}
@@ -224,5 +224,59 @@ alert('{{ flash.toggle_bulletin_success }}');
 alert('{{ flash.toggle_bulletin_error }}');
 </script>
 {% endif %}
+{% if flash.push_bulletin_success is defined %}
+<script>
+alert('{{ flash.push_bulletin_success }}');
+</script>
+{% endif %}
+{% if flash.push_bulletin_error is defined %}
+<script>
+alert('{{ flash.push_bulletin_error }}');
+</script>
+{% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+        // wait for the DOM to be loaded 
+        $(document).ready(function() { 
+            
+            // bind 'myForm' and provide a simple callback function 
+            $('#push').click(function() {
+alert("here1");
+	                $.ajax({
+		                async: false,
+	    				url: 'http://dev.api.baby-search.com/device/push?id='+$(this).attr('bulletin_id'),
+	    				type: "post",
+	    				//data: {"id" : formData},
+	    				success: function(data) {
+							if(data.status == 'success') {
+								console.log("status return success");
+								status = true;
+							}
+							else {
+								console.log("status return fail");
+								status = false;
+							}
+							
+	        				/**
+	        				console.log("success");
+	        				var x;
+	     
+	    					for(i=0; i<data.length; i++) {
+
+	    						x = data[i];
+	    						//console.log(x["id"]);
+	    						//console.log(x["name"]);
+	    					}
+
+	    					if(formData == x["name"])
+	        					console.log("Sorry, user name '" + x["name"] + "' already existed in the system. " +
+	                					"Please try another user name.");
+	    					**/
+	    				}
+	                });
+	    		});
+           });
+	</script>
 
 {% endblock %}

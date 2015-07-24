@@ -580,18 +580,23 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     			$app->get('/push_bulletin(/:id)', $authenticate_admin, function( $id = null ) use ( $app ) {
     				$req = $app->request->params();
     			
-    				$result = Product::push_bulletin( $id );
+    				//$result = Product::push_bulletin( $id );
     				 
-    				$bulletin = Product::get_bulletin_by_imei_code( $id );
+    				//$bulletin = Product::get_bulletin_by_imei_code( $id );
     				 
+    				@file_get_contents("http://dev.api.baby-search.com/device/push?id={$id}");
+    				
+    				$app->flash('push_bulletin_success', '公告巳推播至手機...');
+    				/*
     				if( $result !== false ) {
     					if($bulletin['status'] == 'normal')
-    						$app->flash('toggle_bulletin_success', '公告巳發佈上架...');
+    						$app->flash('push_bulletin_success', '公告巳發佈上架...');
     					else
-    						$app->flash('toggle_bulletin_success', '公告巳下架...');
+    						$app->flash('push_bulletin_success', '公告巳下架...');
     				} else {
-    					$app->flash('toggle_bulletin_error', '寫入資料錯誤');
+    					$app->flash('push_bulletin_error', '寫入資料錯誤');
     				}
+    				*/
     				$app->redirect('/admin/bulletin');
     			});
     $app->get('/product(/:imei_code)', $authenticate_admin, function( $imei_code = null ) use ( $app ) {

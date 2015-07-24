@@ -84,7 +84,7 @@
 							{% elseif p.status == 'lost' %}
 							{{ '遺失' }}
 							{% elseif p.status == 'invalid' %}
-							{{ '停用' }}
+							<a href='/admin/reopen/{{p.serial_number}}'><u><font style="color:red;">{{ '停用' }}</font></u></a>
 							{% endif %}
 						</p>
 					</td>

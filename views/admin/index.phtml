@@ -34,7 +34,7 @@
 
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-			<table class="tablesorter" cellspacing="0"> 
+			<table id="myTable" class="tablesorter" cellspacing="0"> 
 			<thead> 
 				<tr> 
 					<th>No.</th> 
@@ -248,5 +248,14 @@
 alert('{{ flash.import_msg }}');
 </script>
 {% endif %}
+<script src="/js/jquery.latest.js"></script>
+<script src="/js/jquery.tablesorter.js"></script>
 
+<script>
+$(document).ready(function() 
+    { 
+		$("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} );
+    } 
+);
+</script>
 {% endblock %}

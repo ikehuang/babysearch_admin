@@ -112,6 +112,36 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     					'page'		=> $page
     			));
     		});
+    			$app->get('/serial_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				$list = Product::get_list_serial_desc($page);
+    				 
+    				$app->render('admin/serial_desc.phtml', array(
+    						'page_name' => '產品管理',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'      => $page
+    				));
+    			});
+    			$app->get('/serial_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    			
+    				if($page < 1)
+    					$page = 1;
+    			
+    				$list = Product::get_list_serial_desc($page);
+    				//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    			
+    				if(count($list) < 20)
+    					$page--;
+    			
+    				$app->render('admin/serial_desc.phtml', array(
+    						'page_name' => '產品管理',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'		=> $page
+    				));
+    			});
     			$app->get('/created', $authenticate_admin, function($page = 1) use ( $app ) {
     				$admin = SessionNative::read('ADMIN');
     				$list = Product::get_list_created($page);
@@ -142,6 +172,36 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     						'page'		=> $page
     				));
     			});
+    				$app->get('/created_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					$list = Product::get_list_created_desc($page);
+    						
+    					$app->render('admin/created_desc.phtml', array(
+    							'page_name' => '產品管理',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'      => $page
+    					));
+    				});
+    				$app->get('/created_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					 
+    					if($page < 1)
+    						$page = 1;
+    					 
+    					$list = Product::get_list_created_desc($page);
+    					//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					 
+    					if(count($list) < 20)
+    						$page--;
+    					 
+    					$app->render('admin/created_desc.phtml', array(
+    							'page_name' => '產品管理',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'		=> $page
+    					));
+    				});
     	$app->get('/q_tag', $authenticate_admin, function($page = 1) use ( $app ) {
     		$admin = SessionNative::read('ADMIN');
     		$list = Product::get_list_qtag($page);

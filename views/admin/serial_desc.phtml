@@ -19,13 +19,16 @@
 			<li><a href="/admin/add">單筆新增</a></li>
 			<li>|</li>
 			<li><a id="stop">停用</a></li>
+			<li>|</li>
+			<li><a id="clear">清空資料</a></li>
 		</ul>
+		
 		<ul class="tabs" style="margin-top:10px;">
 			<li>
-				<a href="/admin/serial/device/{{ page-1 }}">&lt前一頁</a>
+				<a href="/admin/device/serial_desc/{{ page-1 }}">&lt前一頁</a>
 			</li>
 			<li>|</li>
-			<li><a href="/admin/serial/device/{{ page+1 }}">後一頁></a></li>
+			<li><a href="/admin/device/serial_desc/{{ page+1 }}">後一頁></a></li>
 		</ul>
 		</header>
 
@@ -36,9 +39,9 @@
 				<tr> 
 					<th>No.</th> 
 					<th><input class="choice-all" type="checkbox" ></th> 
-					<th><a href="/admin/serial_desc"><font style="color:black;"><u>序號</u></font></a></th> 
+					<th><a href="/admin/serial"><font style="color:black;"><u>序號</u></font></a></th> 
 					<th>用途</th> 
-					<th><a href="/admin/created_desc"><font style="color:black;"><u>開始使用日期</u></font></a></th> 
+					<th><a href="/admin/created"><font style="color:black;"><u>開始使用日期</u></font></a></th> 
 					<th>期限</th>
 					<th>註册用户</th>
 					<th>狀態</th>
@@ -109,7 +112,7 @@
 							{% elseif l.status == 'lost' %}
 							{{ '遺失' }}
 							{% elseif l.status == 'invalid' %}
-							<font style="color:red;">{{ '停用' }}</font>
+							<a href='/admin/reopen/{{l.serial_number}}'><u><font style="color:red;">{{ '停用' }}</font></u></a>
 							{% endif %}
 						</p>
 					</td> 

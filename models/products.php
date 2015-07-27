@@ -96,6 +96,58 @@ final class Product extends DBModule {
         		ORDER BY did limit {$start},{$limit}";
         return self::_query_all( $query );
     }
+    public static function get_list_serial_qtag($page = 1) {
+    	$limit = 20;
+    	$start = $page == 1 ? 0 : ($page-1)*$limit;
+    	$start = $start <= 0 ? 0 : $start;
+    
+    	$query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    	FROM devices
+    	LEFT JOIN users
+    	ON devices.sso_id=users.sso_id
+    	WHERE LOCATE('Q', devices.serial_number, 1)=3
+    	ORDER BY devices.serial_number limit {$start},{$limit}";
+    	return self::_query_all( $query );
+    }
+    public static function get_list_serial_desc_qtag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('Q', devices.serial_number, 1)=3
+    ORDER BY devices.serial_number DESC limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
+    public static function get_list_created_qtag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('Q', devices.serial_number, 1)=3
+    ORDER BY devices.created DESC limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
+    public static function get_list_created_desc_qtag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('Q', devices.serial_number, 1)=3
+    ORDER BY devices.created limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
     public static function get_list_ntag($page = 1) {
 	$limit = 20;
   	$start = $page == 1 ? 0 : ($page-1)*$limit;

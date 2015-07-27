@@ -232,6 +232,126 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     					'page'		=> $page
     			));
     		});
+    			$app->get('/qtag/serial', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				$list = Product::get_list_serial_qtag($page);
+    				 
+    				$app->render('admin/qtag_serial.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'      => $page
+    				));
+    			});
+    			$app->get('/qtag/serial/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    			
+    				if($page < 1)
+    					$page = 1;
+    			
+    				$list = Product::get_list_serial_qtag($page);
+    				//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    			
+    				if(count($list) < 20)
+    					$page--;
+    			
+    				$app->render('admin/qtag_serial.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'		=> $page
+    				));
+    			});
+    			$app->get('/qtag/serial_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				$list = Product::get_list_serial_desc_qtag($page);
+    					
+    				$app->render('admin/qtag_serial_desc.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'      => $page
+    				));
+    			});
+    			$app->get('/qtag/serial_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				 
+    				if($page < 1)
+    					$page = 1;
+    				 
+    				$list = Product::get_list_serial_desc_qtag($page);
+    				//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    				 
+    				if(count($list) < 20)
+    					$page--;
+    				 
+    				$app->render('admin/qtag_serial_desc.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'		=> $page
+    				));
+    			});
+    			$app->get('/qtag/created', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				$list = Product::get_list_created_qtag($page);
+    					
+    				$app->render('admin/qtag_created.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'      => $page
+    				));
+    			});
+    			$app->get('/qtag/created/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				 
+    				if($page < 1)
+    					$page = 1;
+    				 
+    				$list = Product::get_list_created_qtag($page);
+    				//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    				 
+    				if(count($list) < 20)
+    					$page--;
+    				 
+    				$app->render('admin/qtag_created.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'		=> $page
+    				));
+    			});
+    			$app->get('/qtag_created_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    				$list = Product::get_list_created_desc_qtag($page);
+    			
+    				$app->render('admin/qtag_created_desc.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'      => $page
+    				));
+    			});
+    			$app->get('/qtag_created_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    				$admin = SessionNative::read('ADMIN');
+    			
+    				if($page < 1)
+    					$page = 1;
+    			
+    				$list = Product::get_list_created_desc_qtag($page);
+    				//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    			
+    				if(count($list) < 20)
+    					$page--;
+    			
+    				$app->render('admin/qtag_created_desc.phtml', array(
+    						'page_name' => '產品管理 - Q Tag',
+    						'admin'     => $admin,
+    						'list'      => $list,
+    						'page'		=> $page
+    				));
+    			});
     		$app->get('/n_tag', $authenticate_admin, function($page = 1) use ( $app ) {
     			$admin = SessionNative::read('ADMIN');
     			$list = Product::get_list_ntag($page);

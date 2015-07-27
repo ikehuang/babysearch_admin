@@ -382,6 +382,126 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     						'page'		=> $page
     				));
     			});
+    				$app->get('/ntag/serial', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					$list = Product::get_list_serial_ntag($page);
+    						
+    					$app->render('admin/ntag_serial.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'      => $page
+    					));
+    				});
+    				$app->get('/ntag/serial/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					 
+    					if($page < 1)
+    						$page = 1;
+    					 
+    					$list = Product::get_list_serial_ntag($page);
+    					//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					 
+    					if(count($list) < 20)
+    						$page--;
+    					 
+    					$app->render('admin/ntag_serial.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'		=> $page
+    					));
+    				});
+    				$app->get('/ntag/serial_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					$list = Product::get_list_serial_desc_ntag($page);
+    						
+    					$app->render('admin/ntag_serial_desc.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'      => $page
+    					));
+    				});
+    				$app->get('/ntag/serial_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    						
+    					if($page < 1)
+    						$page = 1;
+    						
+    					$list = Product::get_list_serial_desc_ntag($page);
+    					//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    						
+    					if(count($list) < 20)
+    						$page--;
+    						
+    					$app->render('admin/ntag_serial_desc.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'		=> $page
+    					));
+    				});
+    				$app->get('/ntag/created', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					$list = Product::get_list_created_ntag($page);
+    						
+    					$app->render('admin/ntag_created.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'      => $page
+    					));
+    				});
+    				$app->get('/ntag/created/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    						
+    					if($page < 1)
+    						$page = 1;
+    						
+    					$list = Product::get_list_created_ntag($page);
+    					//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    						
+    					if(count($list) < 20)
+    						$page--;
+    						
+    					$app->render('admin/ntag_created.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'		=> $page
+    					));
+    				});
+    				$app->get('/ntag/created_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					$list = Product::get_list_created_desc_ntag($page);
+    					 
+    					$app->render('admin/ntag_created_desc.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'      => $page
+    					));
+    				});
+    				$app->get('/ntag/created_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    					$admin = SessionNative::read('ADMIN');
+    					 
+    					if($page < 1)
+    						$page = 1;
+    					 
+    					$list = Product::get_list_created_desc_ntag($page);
+    					//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					 
+    					if(count($list) < 20)
+    						$page--;
+    					 
+    					$app->render('admin/ntag_created_desc.phtml', array(
+    							'page_name' => '產品管理 - N Tag',
+    							'admin'     => $admin,
+    							'list'      => $list,
+    							'page'		=> $page
+    					));
+    				});
     			$app->get('/b_tag', $authenticate_admin, function($page = 1) use ( $app ) {
     				$admin = SessionNative::read('ADMIN');
     				$list = Product::get_list_btag($page);
@@ -412,6 +532,126 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     							'page'		=> $page
     					));
     				});
+    					$app->get('/btag/serial', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    						$list = Product::get_list_serial_btag($page);
+    					
+    						$app->render('admin/btag_serial.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'      => $page
+    						));
+    					});
+    					$app->get('/btag/serial/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    					
+    						if($page < 1)
+    							$page = 1;
+    					
+    						$list = Product::get_list_serial_btag($page);
+    						//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					
+    						if(count($list) < 20)
+    							$page--;
+    					
+    						$app->render('admin/btag_serial.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'		=> $page
+    						));
+    					});
+    					$app->get('/btag/serial_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    						$list = Product::get_list_serial_desc_btag($page);
+    					
+    						$app->render('admin/btag_serial_desc.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'      => $page
+    						));
+    					});
+    					$app->get('/btag/serial_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    					
+    						if($page < 1)
+    							$page = 1;
+    					
+    						$list = Product::get_list_serial_desc_btag($page);
+    						//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					
+    						if(count($list) < 20)
+    							$page--;
+    					
+    						$app->render('admin/btag_serial_desc.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'		=> $page
+    						));
+    					});
+    					$app->get('/btag/created', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    						$list = Product::get_list_created_btag($page);
+    					
+    						$app->render('admin/btag_created.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'      => $page
+    						));
+    					});
+    					$app->get('/btag/created/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    					
+    						if($page < 1)
+    							$page = 1;
+    					
+    						$list = Product::get_list_created_btag($page);
+    						//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					
+    						if(count($list) < 20)
+    							$page--;
+    					
+    						$app->render('admin/btag_created.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'		=> $page
+    						));
+    					});
+    					$app->get('/btag/created_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    						$list = Product::get_list_created_desc_btag($page);
+    					
+    						$app->render('admin/btag_created_desc.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'      => $page
+    						));
+    					});
+    					$app->get('/btag/created_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    						$admin = SessionNative::read('ADMIN');
+    					
+    						if($page < 1)
+    							$page = 1;
+    					
+    						$list = Product::get_list_created_desc_btag($page);
+    						//array_push($list, $list[0],$list[0],$list[0],$list[0]);
+    					
+    						if(count($list) < 20)
+    							$page--;
+    					
+    						$app->render('admin/btag_created_desc.phtml', array(
+    								'page_name' => '產品管理 - B Tag',
+    								'admin'     => $admin,
+    								'list'      => $list,
+    								'page'		=> $page
+    						));
+    					});
     				$app->get('/delete(/:serial_number)', $authenticate_admin, function( $serial_number = null ) use ( $app ) {
     					$admin = SessionNative::read('ADMIN');
     					$product = Product::get_by_imei_code( $serial_number );

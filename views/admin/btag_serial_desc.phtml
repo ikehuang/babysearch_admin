@@ -1,0 +1,252 @@
+{% extends 'admin/layout.phtml' %}
+{% block slidebar %} {% include 'admin/slidebar.phtml' %}{% endblock %}
+{% block content %}
+<section id="main" class="column">
+		
+	<!-- <h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4> -->
+	
+	<article class="module width_full">
+		<header><h3 class="tabs_involved">Baby Search</h3>
+		<ul class="tabs">
+		<!-- 
+			<li><a class="change-status" href="javascript:void(0);">變更開通狀態</a></li>
+			<li>|</li>
+		 -->
+			<li>
+				<a href="/admin/import">匯入</a>
+			</li>
+			<li>|</li>
+			<li><a href="/admin/add">單筆新增</a></li>
+			<li>|</li>
+			<li><a id="stop">停用</a></li>
+			<li>|</li>
+			<li><a id="clear">清空資料</a></li>
+		</ul>
+		
+		<ul class="tabs" style="margin-top:10px;">
+			<li>
+				<a href="/admin/btag/serial_desc/device/{{ page-1 }}">&lt前一頁</a>
+			</li>
+			<li>|</li>
+			<li><a href="/admin/btag/serial_desc/device/{{ page+1 }}">後一頁></a></li>
+		</ul>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+			<thead> 
+				<tr> 
+					<th>No.</th> 
+					<th><input class="choice-all" type="checkbox" ></th> 
+					<th><a href="/admin/btag/serial"><font style="color:black;"><u>序號</u></font></a></th> 
+					<th>用途</th> 
+					<th><a href="/admin/btag/created"><font style="color:black;"><u>開始使用日期</u></font></a></th> 
+					<th>期限</th>
+					<th>註册用户</th>
+					<th>狀態</th>
+					<th>移除</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr> 
+			</thead>
+			<tbody>
+				{% if list|length > 0 %}
+				{% for l in list %}
+				<tr> 
+					<td>{{ loop.index }}.</td> 
+					<td>
+						{% if l.serial_number != null %}
+						<input class="choice" type="checkbox" name="choose" value="{{ l.serial_number }}">
+						{% endif %}
+					</td>
+					<td><a class="imei_code ellipsis" href="/admin/product/{{ l.serial_number }}" title="{{ l.serial_number }}">{{ l.serial_number }}</a></td> 
+					<td>
+						<p class="table-content ellipsis">
+						{% if l.serial_number[:1] == 'P' %}
+						{{ '寵物' }}
+						{% elseif l.serial_number[:1] == 'M' %}
+						{{ '人' }}
+						{% elseif l.serial_number[:1] == 'T' %}
+						{{ '物品' }}
+						{% elseif l.serial_number[:1] == 'A' %}
+						{{ '萬用' }}
+						{% endif %}
+						</p>
+					</td> 
+					<td>
+						<p class="table-content ellipsis" title="{{ l.created }}">
+						{% if l.created == null %}
+						{{ 'N/A' }}
+						{% elseif l.created != null %}
+						{{ l.created|date('Y-m-d') }}
+						{% endif %}
+						</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis" title="{{ l.expiry_date }}">
+						{% if l.expiry_date == null %}
+						{{ 'N/A' }}
+						{% elseif l.expiry_date != null %}
+						{{ l.expiry_date }}
+						{% endif %}
+						</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis" title="{{ l.nickname }}">
+						{% if l.nickname == null %}
+						{{ 'N/A' }}
+						{% elseif l.nickname != null %}
+						{{ l.nickname }}
+						{% endif %}
+						</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis">
+							{% if l.status == 'new' %}
+							{{ '未註册' }}
+							{% elseif l.status == 'normal' %}
+							{{ '正常' }}
+							{% elseif l.status == 'lost' %}
+							{{ '遺失' }}
+							{% elseif l.status == 'invalid' %}
+							<a href='/admin/reopen/{{l.serial_number}}'><u><font style="color:red;">{{ '停用' }}</font></u></a>
+							{% endif %}
+						</p>
+					</td> 
+					<td>
+					<!-- 確定要移除序號{{l.serial_number}}? -->
+						{% if l.status == 'new' %}
+						<a href="/admin/delete/{{l.serial_number}}"><div style="background:transparent;"><p class="table-content ellipsis"><font style="color:red;"><strong>X</strong></font></p></div></a>
+						{% endif %}
+					</td>
+					<!-- 
+					<td>
+						<p class="table-content ellipsis">
+							{% set register = l.register_status == 'disable' ? '未註冊' : '已註冊' %}
+							{{ register }}
+						</p>
+					</td>
+					<td>
+						{% if l.service_status == 'active' %}
+						<p class="table-content green ellipsis">SIM卡使用中</p>
+						{% elseif l.service_status == 'expired' %}
+						<p class="table-content red ellipsis">SIM卡服務過期</p>
+						{% endif %}
+					</td>
+					<td>
+						{% if l.active_status == 'inactive' %}
+						<p class="table-content ellipsis">未開通</p>
+						{% elseif l.active_status == 'pending' %}
+						<p class="table-content yellow ellipsis">等待開通</p>
+						{% elseif l.active_status == 'active' %}
+						<p class="table-content green ellipsis">開通保固中</p>
+						{% elseif l.active_status == 'expired' %}
+						<p class="table-content red ellipsis">保固過期</p>
+						{% endif %}
+					</td> 
+					 -->
+					<!-- <td><input type="image" src="../public/img/admin/icn_edit.png" title="Edit"></td> -->
+				</tr>
+				{% endfor %}
+				{% else %}
+				<tr><td colspan="13" style="text-align:center;">尚無資訊</td></tr>
+				{% endif %}
+			</tbody>
+			 <!-- 
+			<thead> 
+				<tr> 
+					<th>No.</th> 
+					<th><input class="choice-all" type="checkbox" ></th> 
+					<th>IMEI</th> 
+					<th>經銷商</th> 
+					<th>購買人</th> 
+					<th>性別</th>
+					<th>地址</th>
+					<th>手機號碼</th>
+					<th>Email</th>
+					<th>註冊狀態</th>
+					<th>SIM卡服務狀態</th>
+					<th>開通狀態</th>
+					<th></th>
+				</tr> 
+			</thead> 
+			<tbody>
+				{% if list|length > 0 %}
+				{% for l in list %}
+				<tr> 
+					<td>{{ loop.index }}.</td> 
+					<td>
+						{% if l.active_status == 'pending' %}
+						<input class="choice" type="checkbox" value="{{ l.imei_code }}">
+						{% endif %}
+					</td>
+					<td><a class="imei_code ellipsis" href="/admin/product/{{ l.imei_code }}" title="{{ l.imei_code }}">{{ l.imei_code }}</a></td> 
+					<td>
+						<p class="table-content ellipsis" title="{{ l.dealer_name }}">{{ l.dealer_name }}</p>
+					</td> 
+					<td>
+						<p class="table-content ellipsis" title="{{ l.name }}">{{ l.name }}</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis">
+							{% set gender = l.gender == 'male' ? '男' : '女' %}
+							{{ gender }}
+						</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis" title="{{ l.zipcode }} {{ l.address }}">{{ l.zipcode }} {{ l.address }}</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis" title="{{ l.phone }}">{{ l.phone }}</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis" title="{{ l.email }}">{{ l.email }}</p>
+					</td>
+					<td>
+						<p class="table-content ellipsis">
+							{% set register = l.register_status == 'disable' ? '未註冊' : '已註冊' %}
+							{{ register }}
+						</p>
+					</td>
+					<td>
+						{% if l.service_status == 'active' %}
+						<p class="table-content green ellipsis">SIM卡使用中</p>
+						{% elseif l.service_status == 'expired' %}
+						<p class="table-content red ellipsis">SIM卡服務過期</p>
+						{% endif %}
+					</td>
+					<td>
+						{% if l.active_status == 'inactive' %}
+						<p class="table-content ellipsis">未開通</p>
+						{% elseif l.active_status == 'pending' %}
+						<p class="table-content yellow ellipsis">等待開通</p>
+						{% elseif l.active_status == 'active' %}
+						<p class="table-content green ellipsis">開通保固中</p>
+						{% elseif l.active_status == 'expired' %}
+						<p class="table-content red ellipsis">保固過期</p>
+						{% endif %}
+					</td> 
+					--><!-- <td><input type="image" src="../public/img/admin/icn_edit.png" title="Edit"></td> 
+				</tr>
+				{% endfor %}
+				{% else %}
+				<tr><td colspan="13" style="text-align:center;">尚無資訊</td></tr>
+				{% endif %}
+			</tbody> 
+			-->
+			</table>
+			</div><!-- end of #tab1 -->
+		</div><!-- end of .tab_container -->
+	</article><!-- end of content manager article -->
+	<div class="spacer"></div>
+</section>
+{% if flash.import_msg is defined %}
+<script>
+alert('{{ flash.import_msg }}');
+</script>
+{% endif %}
+
+{% endblock %}

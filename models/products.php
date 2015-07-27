@@ -161,6 +161,58 @@ final class Product extends DBModule {
         		ORDER BY did limit {$start},{$limit}";
         return self::_query_all( $query );
     }
+    public static function get_list_serial_ntag($page = 1) {
+    	$limit = 20;
+    	$start = $page == 1 ? 0 : ($page-1)*$limit;
+    	$start = $start <= 0 ? 0 : $start;
+    
+    	$query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    	FROM devices
+    	LEFT JOIN users
+    	ON devices.sso_id=users.sso_id
+    	WHERE LOCATE('N', devices.serial_number, 1)=3
+    	ORDER BY devices.serial_number limit {$start},{$limit}";
+    	return self::_query_all( $query );
+    }
+    public static function get_list_serial_desc_ntag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('N', devices.serial_number, 1)=3
+    ORDER BY devices.serial_number DESC limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
+    public static function get_list_created_ntag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('N', devices.serial_number, 1)=3
+    ORDER BY devices.created DESC limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
+    public static function get_list_created_desc_ntag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('N', devices.serial_number, 1)=3
+    ORDER BY devices.created limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
     public static function get_list_btag($page = 1) {
 	$limit = 20;
   	$start = $page == 1 ? 0 : ($page-1)*$limit;
@@ -173,7 +225,59 @@ final class Product extends DBModule {
 			WHERE LOCATE('B', devices.serial_number, 1)=3
         		ORDER BY did limit {$start},{$limit}";
         return self::_query_all( $query );
-    }	
+    }
+    public static function get_list_serial_btag($page = 1) {
+    	$limit = 20;
+    	$start = $page == 1 ? 0 : ($page-1)*$limit;
+    	$start = $start <= 0 ? 0 : $start;
+    
+    	$query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    	FROM devices
+    	LEFT JOIN users
+    	ON devices.sso_id=users.sso_id
+    	WHERE LOCATE('B', devices.serial_number, 1)=3
+    	ORDER BY devices.serial_number limit {$start},{$limit}";
+    	return self::_query_all( $query );
+    }
+    public static function get_list_serial_desc_btag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('B', devices.serial_number, 1)=3
+    ORDER BY devices.serial_number DESC limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
+    public static function get_list_created_btag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('B', devices.serial_number, 1)=3
+    ORDER BY devices.created DESC limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
+    public static function get_list_created_desc_btag($page = 1) {
+    $limit = 20;
+    $start = $page == 1 ? 0 : ($page-1)*$limit;
+    $start = $start <= 0 ? 0 : $start;
+    
+    $query = "SELECT did,serial_number,status,expiry_date,created,nickname
+    FROM devices
+    LEFT JOIN users
+    ON devices.sso_id=users.sso_id
+    WHERE LOCATE('B', devices.serial_number, 1)=3
+    ORDER BY devices.created limit {$start},{$limit}";
+    return self::_query_all( $query );
+    }
     public static function get_list_by_pending() {
         $query = "SELECT `p`.`imei_code`, `p`.`dealer_name`, `p`.`dealer_shop`, `p`.`active_status`, `p`.`service_status`, `p`.`register_status`, `b`.`name`, `b`.`email`, `b`.`phone`, `b`.`gender`, `b`.`zipcode`, `b`.`address`
                 FROM `devices` AS p

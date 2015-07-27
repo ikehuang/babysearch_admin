@@ -322,7 +322,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     						'page'		=> $page
     				));
     			});
-    			$app->get('/qtag_created_desc', $authenticate_admin, function($page = 1) use ( $app ) {
+    			$app->get('/qtag/created_desc', $authenticate_admin, function($page = 1) use ( $app ) {
     				$admin = SessionNative::read('ADMIN');
     				$list = Product::get_list_created_desc_qtag($page);
     			
@@ -333,7 +333,7 @@ $app->group('/admin', function() use ( $app, $authenticate_admin ) {
     						'page'      => $page
     				));
     			});
-    			$app->get('/qtag_created_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
+    			$app->get('/qtag/created_desc/device(/:page)', $authenticate_admin, function($page = 1) use ( $app ) {
     				$admin = SessionNative::read('ADMIN');
     			
     				if($page < 1)

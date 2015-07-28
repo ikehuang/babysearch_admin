@@ -1060,7 +1060,7 @@ final class Product extends DBModule {
 		return self::_update( $query, $params );
 	
 	}
-	
+	/*
 	public static function push_bulletin( $id ) {
 	
 		$bulletin = self::get_bulletin_by_imei_code( $id );
@@ -1108,4 +1108,5 @@ final class Product extends DBModule {
         }
 	
 	}
+	*/
 }
